@@ -1,0 +1,26 @@
+{"level":"debug","ts":1651114702185,"caller":"zaplog/zaplog.go:240","msg":"","data":"it's a test log , hhh, 10"}
+{"level":"debug","ts":1651114829197,"caller":"zaplog/zaplog.go:240","msg":"","data":"it's a test log , hhh, 10"}
+{"level":"info","ts":1651114829197,"caller":"zaplog/zaplog.go:244","msg":"","data":"it's a test log , hhh, 10"}
+{"level":"warn","ts":1651114829197,"caller":"zaplog/zaplog.go:248","msg":"","data":"it's a test log , hhh, 10"}
+{"level":"error","ts":1651114829197,"caller":"zaplog/zaplog.go:252","msg":"","data":"it's a test log , hhh, 10","stacktrace":"mico-parking/internal/pkg/zaplog.Errorf\n\t/Users/litiantian/code/mico/mico-backend/mico-parking/internal/pkg/zaplog/zaplog.go:252\nmico-parking/internal/pkg/zaplog.TestDebugf\n\t/Users/litiantian/code/mico/mico-backend/mico-parking/internal/pkg/zaplog/zaplog_test.go:41\ntesting.tRunner\n\t/usr/local/go/src/testing/testing.go:1439"}
+{"level":"fatal","ts":1651114829198,"caller":"zaplog/zaplog.go:256","msg":"","data":"it's a test log , hhh, 10","stacktrace":"mico-parking/internal/pkg/zaplog.Fatalf\n\t/Users/litiantian/code/mico/mico-backend/mico-parking/internal/pkg/zaplog/zaplog.go:256\nmico-parking/internal/pkg/zaplog.TestDebugf\n\t/Users/litiantian/code/mico/mico-backend/mico-parking/internal/pkg/zaplog/zaplog_test.go:42\ntesting.tRunner\n\t/usr/local/go/src/testing/testing.go:1439"}
+{"level":"debug","ts":1651114955761,"caller":"zaplog/zaplog.go:240","msg":"","data":"it's a test log , hhh, 10"}
+{"level":"debug","ts":1651114962316,"caller":"zaplog/zaplog.go:240","msg":"","data":"it's a test log , hhh, 10"}
+{"level":"info","ts":1651114962317,"caller":"zaplog/zaplog.go:244","msg":"","data":"it's a test log , hhh, 10"}
+{"level":"debug","ts":1651114967359,"caller":"zaplog/zaplog.go:240","msg":"","data":"it's a test log , hhh, 10"}
+{"level":"info","ts":1651114967359,"caller":"zaplog/zaplog.go:244","msg":"","data":"it's a test log , hhh, 10"}
+{"level":"warn","ts":1651114967359,"caller":"zaplog/zaplog.go:248","msg":"","data":"it's a test log , hhh, 10"}
+{"level":"debug","ts":1651114972791,"caller":"zaplog/zaplog.go:240","msg":"","data":"it's a test log , hhh, 10"}
+{"level":"info","ts":1651114972792,"caller":"zaplog/zaplog.go:244","msg":"","data":"it's a test log , hhh, 10"}
+{"level":"warn","ts":1651114972792,"caller":"zaplog/zaplog.go:248","msg":"","data":"it's a test log , hhh, 10"}
+{"level":"error","ts":1651114972792,"caller":"zaplog/zaplog.go:252","msg":"","data":"it's a test log , hhh, 10","stacktrace":"mico-parking/internal/pkg/zaplog.Errorf\n\t/Users/litiantian/code/mico/mico-backend/mico-parking/internal/pkg/zaplog/zaplog.go:252\nmico-parking/internal/pkg/zaplog.TestDebugf\n\t/Users/litiantian/code/mico/mico-backend/mico-parking/internal/pkg/zaplog/zaplog_test.go:41\ntesting.tRunner\n\t/usr/local/go/src/testing/testing.go:1439"}
+{"level":"debug","ts":1651114978826,"caller":"zaplog/zaplog.go:240","msg":"","data":"it's a test log , hhh, 10"}
+{"level":"info","ts":1651114978826,"caller":"zaplog/zaplog.go:244","msg":"","data":"it's a test log , hhh, 10"}
+{"level":"warn","ts":1651114978826,"caller":"zaplog/zaplog.go:248","msg":"","data":"it's a test log , hhh, 10"}
+{"level":"error","ts":1651114978826,"caller":"zaplog/zaplog.go:252","msg":"","data":"it's a test log , hhh, 10","stacktrace":"mico-parking/internal/pkg/zaplog.Errorf\n\t/Users/litiantian/code/mico/mico-backend/mico-parking/internal/pkg/zaplog/zaplog.go:252\nmico-parking/internal/pkg/zaplog.TestDebugf\n\t/Users/litiantian/code/mico/mico-backend/mico-parking/internal/pkg/zaplog/zaplog_test.go:41\ntesting.tRunner\n\t/usr/local/go/src/testing/testing.go:1439"}
+{"level":"fatal","ts":1651114978827,"caller":"zaplog/zaplog.go:256","msg":"","data":"it's a test log , hhh, 10","stacktrace":"mico-parking/internal/pkg/zaplog.Fatalf\n\t/Users/litiantian/code/mico/mico-backend/mico-parking/internal/pkg/zaplog/zaplog.go:256\nmico-parking/internal/pkg/zaplog.TestDebugf\n\t/Users/litiantian/code/mico/mico-backend/mico-parking/internal/pkg/zaplog/zaplog_test.go:42\ntesting.tRunner\n\t/usr/local/go/src/testing/testing.go:1439"}
+{"level":"debug","ts":1651117061597,"caller":"zaplog/zaplog.go:241","msg":"hhhhhhhhh"}
+{"level":"info","ts":1651117061597,"caller":"zaplog/zaplog.go:245","msg":"hhhhhhhhh"}
+{"level":"warn","ts":1651117061597,"caller":"zaplog/zaplog.go:249","msg":"hhhhhhhhh"}
+{"level":"error","ts":1651117061597,"caller":"zaplog/zaplog.go:253","msg":"hhhhhhhhh","stacktrace":"mico-parking/internal/pkg/zaplog.Error\n\t/Users/litiantian/code/mico/mico-backend/mico-parking/internal/pkg/zaplog/zaplog.go:253\nmico-parking/internal/pkg/zaplog.TestLog\n\t/Users/litiantian/code/mico/mico-backend/mico-parking/internal/pkg/zaplog/zaplog_test.go:41\ntesting.tRunner\n\t/usr/local/go/src/testing/testing.go:1439"}
+{"level":"fatal","ts":1651117061598,"caller":"zaplog/zaplog.go:257","msg":"hhhhhhhhh","stacktrace":"mico-parking/internal/pkg/zaplog.Fatal\n\t/Users/litiantian/code/mico/mico-backend/mico-parking/internal/pkg/zaplog/zaplog.go:257\nmico-parking/internal/pkg/zaplog.TestLog\n\t/Users/litiantian/code/mico/mico-backend/mico-parking/internal/pkg/zaplog/zaplog_test.go:42\ntesting.tRunner\n\t/usr/local/go/src/testing/testing.go:1439"}

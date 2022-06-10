@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../o_code/7days-golang/.idea/7days-golang.iml" filepath="$PROJECT_DIR$/../o_code/7days-golang/.idea/7days-golang.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../o_code/datacenter/.idea/datacenter.iml" filepath="$PROJECT_DIR$/../o_code/datacenter/.idea/datacenter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../o_code/go-gin-api/.idea/go-gin-api.iml" filepath="$PROJECT_DIR$/../o_code/go-gin-api/.idea/go-gin-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../o_code/go-gin-example/.idea/go-gin-example.iml" filepath="$PROJECT_DIR$/../o_code/go-gin-example/.idea/go-gin-example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../m_code/go_deep/.idea/go_deep.iml" filepath="$PROJECT_DIR$/../m_code/go_deep/.idea/go_deep.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/go_primer.iml" filepath="$PROJECT_DIR$/.idea/go_primer.iml" />
+    </modules>
+  </component>
+</project>

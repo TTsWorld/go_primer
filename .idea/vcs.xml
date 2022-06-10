@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../m_code/go_deep" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../o_code/datacenter" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../o_code/go-gin-api" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../o_code/go-gin-example" vcs="Git" />
+  </component>
+</project>
