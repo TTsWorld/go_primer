@@ -1,0 +1,40 @@
+syntax = "proto3";
+package grpc.api;
+
+option java_multiple_files = true;
+option go_package = "./grpc";
+option java_package = "com.mico.provider.grpc.api";
+import "rsp_head.proto";
+
+service UserIcon{
+  // 获取用户车辆 icon
+  rpc getUserIcon(UserIconRequest) returns (UserIconResponse);
+}
+
+message UserIconRequest{
+  repeated int64 uId = 1;
+}
+
+message UserIconResponse{
+  RspHead rspHead = 1;
+  repeated string icon = 2; //头像地址
+}
+
+/*
+ 异常列表：
+    幸运礼物：
+      21801：礼物资源不存在
+      21809：给自己送礼
+      21803：余额不足
+      21811：礼物类型错误（不是幸运礼物）
+      21812：区域未开放
+
+      218xx
+*/
+
+
+
+
+
+
+
