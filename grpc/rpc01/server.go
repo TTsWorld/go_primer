@@ -4,10 +4,9 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	pb "go_primer/grpc/gen-go/grpc"
 	"log"
 	"net"
-
-	pb "go_primer/rpc/gen-go/grpc"
 
 	"google.golang.org/grpc"
 )

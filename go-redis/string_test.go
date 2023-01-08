@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"reflect"
 	"testing"
+	"time"
 
 	"github.com/go-redis/redis/v8"
 )
@@ -30,7 +31,7 @@ func TestSet01(t *testing.T) {
 	err = redisDB.Del(ctx, str2).Err()
 	fmt.Printf("%v\n", err)
 	val, err = redisDB.Get(ctx, str2).Result()
-	fmt.Printf("%v\n", val)
+	fmt.Printf("%v\n", val == "")
 	fmt.Printf("%v\n", err == nil)
 	fmt.Printf("%v\n", err == redis.Nil)
 	if err == redis.Nil {
@@ -51,5 +52,32 @@ func TestMget(t *testing.T) {
 	println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
 	val, err := redisDB.MGet(ctx, str1, str2, str3, str4).Result()
 	fmt.Printf("%#v\n %#v\n", val, err == nil)
+	println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
+	fmt.Printf("%#v %#v %+v\n", val[0], val[0] == nil, val[0] == redis.Nil)
+	fmt.Printf("%#v %#v %+v\n", val[1], val[1] == nil, val[1] == redis.Nil)
+	fmt.Printf("%#v %#v %+v\n", val[2], val[2] == nil, val[2] == redis.Nil)
+	fmt.Printf("%#v %#v %+v\n", val[3], val[3] == nil, val[3] == redis.Nil)
+	println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
 	fmt.Printf("%#v\n %#v\n", val, err == redis.Nil)
+}
+
+func TestMset(t *testing.T) {
+	redisDB.MSet(ctx, 0)
+}
+
+func TestSetNx(t *testing.T) {
+	ok, err := redisDB.SetNX(ctx, "aabb", 1, time.Minute).Result()
+	fmt.Printf("%#v\n %#v\n", ok, err)
+	ok, err = redisDB.SetNX(ctx, "aabb", 1, time.Minute).Result()
+	fmt.Printf("%#v\n %#v\n", ok, err)
+}
+
+func TestAa(t *testing.T) {
+	for i := 0; i < 100; i += 2 {
+		fmt.Print("a:")
+		fmt.Println(100 - i)
+		fmt.Print("b:")
+		fmt.Println(100 - i - 1)
+
+	}
 }

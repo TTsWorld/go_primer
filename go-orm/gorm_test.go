@@ -38,3 +38,11 @@ func TestUser(t *testing.T) {
 		fmt.Sprintf("%v != %v", userCases[0], userList[0]))
 
 }
+
+func TestFind(t *testing.T) {
+	rows, err := db.Debug().Table("user_info").Select("uid").Rows()
+	fmt.Sprintf("%+v, %+v", rows, err)
+	for rows.Next() {
+
+	}
+}

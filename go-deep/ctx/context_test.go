@@ -13,17 +13,20 @@ func TestContext01(t *testing.T) {
 	defer cancel()
 
 	go func(ctx context.Context, duration time.Duration) {
-		select {
-		case <-ctx.Done():
-			fmt.Println("handle", ctx.Err())
-		case <-time.After(duration):
-			fmt.Println("process request with", duration)
+		for {
+			select {
+			case <-ctx.Done():
+				fmt.Println("handle", ctx.Err())
+				return
+			default:
+				fmt.Println("xxxxxx")
+			}
+			time.Sleep(500 * time.Millisecond)
 		}
-	}(ctx, 1500*time.Millisecond)
-	select {
-	case <-ctx.Done():
-		fmt.Println("main", ctx.Err())
-	}
+		//下面函数的参数从 500 ms 调整为 3s，则携程会直接取消
+	}(ctx, 500*time.Millisecond)
+
+	time.Sleep(3 * time.Second)
 }
 
 func TestContext02(t *testing.T) {

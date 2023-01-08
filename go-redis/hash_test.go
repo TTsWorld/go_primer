@@ -30,10 +30,10 @@ func TestHash(t *testing.T) {
 	//get all
 	val, err := redisDB.HGetAll(ctx, hash1).Result()
 	fmt.Printf("%#v :::: %#v :::%#v ::: %#v\n", val, err, err == nil, err == redis.Nil)
-	//map[string]string{"a":"1", "b":"4", "c":"3", "e":"5", "z":"5"} :::: <nil> :::true ::: false
+	//map_t[string]string{"a":"1", "b":"4", "c":"3", "e":"5", "z":"5"} :::: <nil> :::true ::: false
 	val2 := redisDB.HGetAll(ctx, hash1).String()
 	fmt.Printf("%#v :::: \n", val2)
-	//"hgetall hash1: map[a:1 b:4 c:3 e:5 z:5]" ::::
+	//"hgetall hash1: map_t[a:1 b:4 c:3 e:5 z:5]" ::::
 
 	//get  exists
 	val3, err := redisDB.HGet(ctx, hash1, "c").Result()
@@ -80,7 +80,7 @@ func TestMHash(t *testing.T) {
 	//get all
 	val, err := redisDB.HGetAll(ctx, hash2).Result()
 	fmt.Printf("%#v :::: %#v :::%#v ::: %#v\n", val, err, err == nil, err == redis.Nil)
-	//map[string]string{"a":"a", "b":"4", "c":"3", "d":"4", "e":"e"} :::: <nil> :::true ::: false
+	//map_t[string]string{"a":"a", "b":"4", "c":"3", "d":"4", "e":"e"} :::: <nil> :::true ::: false
 
 	//HMGet
 	val2, err := redisDB.HMGet(ctx, hash2, "a", "b", "z", "f").Result()
@@ -118,7 +118,6 @@ func TestHMget(t *testing.T) {
 	if err := redisDB.HSet(ctx, "keyexistvalnotexists1", "aa", 1, "bb", 2).Err(); err != nil {
 		fmt.Printf("HSet failed key:%s , value:%s v\n", "keyexistvalnotexists1", "aaa")
 	}
-
 	result, err := redisDB.HMGet(ctx, "keyexistvalnotexists1", "aa", "cc").Result()
 	fmt.Printf("result[0]: %#v :::: %#v :::: %#v:::: %#v:::%#v ::: %#v\n", result[0], result[0] == "0", result[0] == "1", err, err == nil, err == redis.Nil)
 	fmt.Printf("result[1]: %#v :::: %#v :::: %#v:::: %#v:::%#v ::: %#v\n", result[1], result[1] == "0", result[1] == "1", err, result[1] == nil, result[1] == redis.Nil)
@@ -138,5 +137,19 @@ func TestScan(t *testing.T) {
 	ctx := context.Background()
 	err := redisDB.HGetAll(ctx, "hh000").Scan(&a)
 	fmt.Printf("%#v :::: %#v :::: %#v:::: %#v\n", a, err, err == nil, err == redis.Nil)
+}
+
+func TestHGet(t *testing.T) {
+	res, err := redisDB.HGet(ctx, "aaa", "b").Result()
+	fmt.Printf("HSet res:%s , err:%v", res, err)
+}
+
+func TestHMset(t *testing.T) {
+	setarr := []string{"1", "1", "2", "2", "3", "3", "4", "4"}
+	setMap := map[string]string{"1": "1", "2": "2", "3": "3", "4": "4"}
+	res1, err1 := redisDB.HSet(ctx, "ac2a", setarr).Result()
+	res2, err2 := redisDB.HSet(ctx, "ac1a", setMap).Result()
+	fmt.Printf("HSet res:%+v , err:%+v", res1, err1)
+	fmt.Printf("HSet res:%+v , err:%+v", res2, err2)
 
 }

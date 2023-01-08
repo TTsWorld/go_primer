@@ -3,6 +3,7 @@ package go_redis
 import (
 	"fmt"
 	"testing"
+	"time"
 
 	"github.com/go-redis/redis"
 )
@@ -28,7 +29,7 @@ func TestSet(t *testing.T) {
 
 	val3, err := redisDB.SMembersMap(ctx, set1).Result()
 	fmt.Printf("%#v :::: %#v ::: %#v\n", val3, err == nil, err == redis.Nil)
-	//map[string]struct {}{"1":struct {}{}, "2":struct {}{}, "3":struct {}{}} :::: true ::: false
+	//map_t[string]struct {}{"1":struct {}{}, "2":struct {}{}, "3":struct {}{}} :::: true ::: false
 
 	val4, err := redisDB.SRem(ctx, set1, 3).Result()
 	fmt.Printf("%#v :::: %#v ::: %#v\n", val4, err == nil, err == redis.Nil)
@@ -52,5 +53,10 @@ func TestSet(t *testing.T) {
 	val8, err := redisDB.SCard(ctx, "keynotexists").Result()
 	fmt.Printf("%#v :::: %#v :::%#v ::: %#v\n", val8, err, err == nil, err == redis.Nil)
 	//1 :::: true ::: false
+
+	ok, err1 := redisDB.SetNX(ctx, "setnxtest2", "1", time.Minute).Result()
+	fmt.Printf("%#v :::: %#v \n", ok, err1)
+	ok, err2 := redisDB.SetNX(ctx, "setnxtest2", "1", time.Minute).Result()
+	fmt.Printf("%#v :::: %#v \n", ok, err2)
 
 }
