@@ -10,17 +10,15 @@ import (
 	"github.com/go-redis/redis/v8"
 )
 
-var redisDB *redis.Client
-var ctx context.Context
 var str1, str2, str3, str4 = "str1", "str2", "str3", "str4"
 
 func TestPing(t *testing.T) {
-	println(redisDB.Ping(ctx).Result())
+	println(RedisDB.Ping(Gctx).Result())
 }
 
 func TestSet01(t *testing.T) {
-	ctx := context.Background()
-	val, err := redisDB.Set(ctx, str1, str1, 0).Result()
+	Gctx := context.Background()
+	val, err := RedisDB.Set(Gctx, str1, str1, 0).Result()
 	if err != nil {
 		panic(err)
 	}
@@ -28,9 +26,9 @@ func TestSet01(t *testing.T) {
 
 	println("===============")
 	//get no exists key
-	err = redisDB.Del(ctx, str2).Err()
+	err = RedisDB.Del(Gctx, str2).Err()
 	fmt.Printf("%v\n", err)
-	val, err = redisDB.Get(ctx, str2).Result()
+	val, err = RedisDB.Get(Gctx, str2).Result()
 	fmt.Printf("%v\n", val == "")
 	fmt.Printf("%v\n", err == nil)
 	fmt.Printf("%v\n", err == redis.Nil)
@@ -41,16 +39,16 @@ func TestSet01(t *testing.T) {
 	println("===============")
 
 	//getset && setnx
-	//redisDB.GetSet(str2, str2)
+	//RedisDB.GetSet(str2, str2)
 }
 func TestMget(t *testing.T) {
-	redisDB.Set(ctx, str3, str3, 0)
-	fmt.Printf("%#v\n", redisDB.MGet(ctx, str1, str2, str3, str4).String())
-	fmt.Printf("%#v\n", redisDB.MGet(ctx, str1, str2, str3, str4).Name())
-	fmt.Printf("%#v\n", redisDB.MGet(ctx, str1, str2, str3, str4).Val()[1])
-	fmt.Printf("%#v\n", redisDB.MGet(ctx, str1, str2, str3, str4).Args())
+	RedisDB.Set(Gctx, str3, str3, 0)
+	fmt.Printf("%#v\n", RedisDB.MGet(Gctx, str1, str2, str3, str4).String())
+	fmt.Printf("%#v\n", RedisDB.MGet(Gctx, str1, str2, str3, str4).Name())
+	fmt.Printf("%#v\n", RedisDB.MGet(Gctx, str1, str2, str3, str4).Val()[1])
+	fmt.Printf("%#v\n", RedisDB.MGet(Gctx, str1, str2, str3, str4).Args())
 	println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
-	val, err := redisDB.MGet(ctx, str1, str2, str3, str4).Result()
+	val, err := RedisDB.MGet(Gctx, str1, str2, str3, str4).Result()
 	fmt.Printf("%#v\n %#v\n", val, err == nil)
 	println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
 	fmt.Printf("%#v %#v %+v\n", val[0], val[0] == nil, val[0] == redis.Nil)
@@ -62,13 +60,13 @@ func TestMget(t *testing.T) {
 }
 
 func TestMset(t *testing.T) {
-	redisDB.MSet(ctx, 0)
+	RedisDB.MSet(Gctx, 0)
 }
 
 func TestSetNx(t *testing.T) {
-	ok, err := redisDB.SetNX(ctx, "aabb", 1, time.Minute).Result()
+	ok, err := RedisDB.SetNX(Gctx, "aabb", 1, time.Minute).Result()
 	fmt.Printf("%#v\n %#v\n", ok, err)
-	ok, err = redisDB.SetNX(ctx, "aabb", 1, time.Minute).Result()
+	ok, err = RedisDB.SetNX(Gctx, "aabb", 1, time.Minute).Result()
 	fmt.Printf("%#v\n %#v\n", ok, err)
 }
 

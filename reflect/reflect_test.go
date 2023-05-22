@@ -8,11 +8,11 @@ import (
 
 //变量几种反射的用法，包括如何获取其值、其类型、如何重新设置新值。
 
-//通过reflect.ValueOf来进行方法的调用
+// 通过reflect.ValueOf来进行方法的调用
 type User struct {
-	Id   int
-	Name string
-	Age  int
+	Id   int    `col:id`
+	Name string `col:name`
+	Age  int    `col:age`
 }
 
 func (u User) ReflectCallFunc() {
@@ -27,9 +27,9 @@ func (u User) ReflectCallFuncNoArgs() {
 	fmt.Println("ReflectCallFuncNoArgs")
 }
 
-//已知原有类型（进行强制转换反射）
+// 已知原有类型（进行强制转换反射）
 func TestReflect(t *testing.T) {
-	var a float64 = 3.14
+	var a = 3.14
 
 	pointer := reflect.ValueOf(&a)
 	value := reflect.ValueOf(a)
@@ -41,6 +41,15 @@ func TestReflect(t *testing.T) {
 	fmt.Println("the value of a ", convertToval)
 }
 
+func TestName(t *testing.T) {
+	var b = 100
+	vb := reflect.ValueOf(&b) //这里必须是地址
+
+	vb.Elem().SetInt(20) //Elem 用来获取指针指向的变量, vb必须canAddress
+	fmt.Println(b)
+
+}
+
 // 通过接口来获取任意参数，然后一一揭晓
 func TestReflect02(t *testing.T) {
 	input := User{1, "Allen.Wu", 25}
@@ -50,7 +59,7 @@ func TestReflect02(t *testing.T) {
 	getValue := reflect.ValueOf(input)
 	fmt.Println("get all Fields is:", getValue)
 
-	// 获取方法字段
+	// 获取结构体字段
 	// 1. 先获取interface的reflect.Type，然后通过NumField进行遍历
 	// 2. 再通过reflect.Type的Field获取其Field
 	// 3. 最后通过Field的Interface()得到对应的value
@@ -58,6 +67,11 @@ func TestReflect02(t *testing.T) {
 		field := getType.Field(i)
 		value := getValue.Field(i).Interface()
 		fmt.Printf("Filed/Value: %s: %v = %v\n", field.Name, field.Type, value)
+
+		// 获取结构体 tag
+		tag := field.Tag
+		fmt.Printf("222222 Filed/Value: %s: %v = %v, tag:%v \n", field.Name, field.Type, value, tag)
+
 	}
 
 	// 获取方法
@@ -66,9 +80,12 @@ func TestReflect02(t *testing.T) {
 		m := getType.Method(i)
 		fmt.Printf("method ==> %s: %v\n", m.Name, m.Type)
 	}
+
+	//获取 tag
+
 }
 
-//使用反射调用函数方法
+// 使用反射调用函数方法
 func TestReflect03(t *testing.T) {
 	user := User{1, "Allen.Wu", 25}
 
@@ -87,4 +104,8 @@ func TestReflect03(t *testing.T) {
 	methodValue = getValue.MethodByName("ReflectCallFuncNoArgs")
 	args = make([]reflect.Value, 0)
 	methodValue.Call(args)
+}
+
+func TestReflect04(t *testing.T) {
+
 }

@@ -2,6 +2,7 @@ package htt_test
 
 import (
 	"fmt"
+	"io"
 	"net/http"
 	"testing"
 )
@@ -32,12 +33,57 @@ func headers(w http.ResponseWriter, req *http.Request) {
 		}
 	}
 }
+
+// http天坑，body 只能读一次，再次读不回报错但读不到
+func readBodyOnce(w http.ResponseWriter, req *http.Request) {
+	body, err := io.ReadAll(req.Body)
+	if err != nil {
+		fmt.Fprintf(w, "read body failed, err:%v \n", err)
+		return
+	}
+	fmt.Fprintf(w, "read the data: %v\n", string(body))
+
+	//再次读 body，啥也读不到，但是也不会报错
+	body, err = io.ReadAll(req.Body)
+	if err != nil {
+		fmt.Fprintf(w, "read body failed 222, err:%v \n", err)
+		return
+	}
+	fmt.Fprintf(w, "read the data 222: %v\n", string(body))
+}
+
+func readBodyOnceResolve(w http.ResponseWriter, req *http.Request) {
+	body, err := io.ReadAll(req.Body)
+	if err != nil {
+		fmt.Fprintf(w, "read body failed, err:%v \n", err)
+		return
+	}
+	fmt.Fprintf(w, "read the data: %v\n", string(body))
+
+	//再次读 body，啥也读不到，但是也不会报错
+	body, err = io.ReadAll(req.Body)
+	if err != nil {
+		fmt.Fprintf(w, "read body failed 222, err:%v \n", err)
+		return
+	}
+	fmt.Fprintf(w, "read the data 222: %v\n", string(body))
+}
+
+// GetBody默认为 nil，中间件可以考虑注入这个方法
+func getBody(w http.ResponseWriter, req *http.Request) {
+	body, _ := req.GetBody()
+	if body == nil {
+		fmt.Fprintf(w, "getBody is Nil \n")
+	} else {
+		fmt.Fprintf(w, "getBody is not Nil \n")
+	}
+}
+
 func TestHttp(t *testing.T) {
 	http.HandleFunc("/hello", hello)
 	http.HandleFunc("/headers", headers)
+	http.HandleFunc("/read", readBodyOnce)
+	http.HandleFunc("/getbody", getBody)
 
-	// Finally, we call the `ListenAndServe` with the port
-	// and a handler. `nil` tells it to use the default
-	// router we've just set up.
 	http.ListenAndServe(":8090", nil)
 }

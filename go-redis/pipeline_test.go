@@ -9,15 +9,15 @@ import (
 )
 
 func TestPipeLine(t *testing.T) {
-	redisDB.Set(ctx, "a", 1, time.Minute)
-	redisDB.Set(ctx, "b", 1, time.Minute)
-	redisDB.Set(ctx, "c", 1, time.Minute)
-	redisDB.Set(ctx, "d", 1, time.Minute)
-	redisDB.Set(ctx, "e", 1, time.Minute)
+	RedisDB.Set(Gctx, "a", 1, time.Minute)
+	RedisDB.Set(Gctx, "b", 1, time.Minute)
+	RedisDB.Set(Gctx, "c", 1, time.Minute)
+	RedisDB.Set(Gctx, "d", 1, time.Minute)
+	RedisDB.Set(Gctx, "e", 1, time.Minute)
 
-	cmds, err := redisDB.Pipelined(ctx, func(pipe redis.Pipeliner) error {
+	cmds, err := RedisDB.Pipelined(Gctx, func(pipe redis.Pipeliner) error {
 		for _, v := range []string{"a", "b", "", "d", "e"} {
-			pipe.Get(ctx, fmt.Sprintf("%s", v))
+			pipe.Get(Gctx, fmt.Sprintf("%s", v))
 		}
 		return nil
 	})
@@ -35,15 +35,15 @@ func TestPipeLine(t *testing.T) {
 }
 
 func TestPipeLineZset(t *testing.T) {
-	redisDB.ZAdd(ctx, "a11", &redis.Z{Score: 1, Member: 1})
-	redisDB.ZAdd(ctx, "a11", &redis.Z{Score: 2, Member: 2})
-	redisDB.ZAdd(ctx, "a11", &redis.Z{Score: 3, Member: 3})
-	redisDB.ZAdd(ctx, "a11", &redis.Z{Score: 4, Member: 4})
+	RedisDB.ZAdd(Gctx, "a11", &redis.Z{Score: 1, Member: 1})
+	RedisDB.ZAdd(Gctx, "a11", &redis.Z{Score: 2, Member: 2})
+	RedisDB.ZAdd(Gctx, "a11", &redis.Z{Score: 3, Member: 3})
+	RedisDB.ZAdd(Gctx, "a11", &redis.Z{Score: 4, Member: 4})
 	keys := []string{"a11"}
 
-	cmds, err := redisDB.Pipelined(ctx, func(pipe redis.Pipeliner) error {
+	cmds, err := RedisDB.Pipelined(Gctx, func(pipe redis.Pipeliner) error {
 		for _, key := range keys {
-			pipe.ZRevRangeWithScores(ctx, key, 0, -1)
+			pipe.ZRevRangeWithScores(Gctx, key, 0, -1)
 		}
 		return nil
 	})

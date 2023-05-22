@@ -2,7 +2,10 @@ package gonum
 
 import (
 	"fmt"
+	"github.com/spf13/cast"
+	"strconv"
 	"testing"
+	"time"
 
 	"gonum.org/v1/gonum/mat"
 
@@ -37,7 +40,7 @@ func TestFloatsDot(t *testing.T) {
 	fmt.Println("s=", s)
 }
 
-//将 slice 转换为 VectorDense 数据类型，然后进行矩阵运算
+// 将 slice 转换为 VectorDense 数据类型，然后进行矩阵运算
 func TestFloatsDot2(t *testing.T) {
 	s1 := []float64{0, 1, 2, 4}
 	s2 := []float64{0, 2, 3, 6}
@@ -61,5 +64,12 @@ func TestMaxMin(t *testing.T) {
 }
 
 func TestAA(t *testing.T) {
+	incre := 100000000
+	fract := int64(2147483647) - time.Now().Unix()
+	fmt.Println(fract)
+	f := cast.ToString(incre) + "." + strconv.FormatInt(fract, 10)
+	bb := cast.ToFloat64(f)
+	fmt.Printf("%.100f", bb)
+	fmt.Println(int64(bb))
 
 }
