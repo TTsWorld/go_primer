@@ -1,9 +1,12 @@
 package go_redis
 
 import (
+	"context"
 	"fmt"
 	"testing"
 	"time"
+
+	"github.com/spf13/cast"
 
 	"github.com/go-redis/redis/v8"
 )
@@ -60,5 +63,33 @@ func TestPipeLineZset(t *testing.T) {
 
 			fmt.Printf("member:%v, score:%v, err:%v\n", member, score, err)
 		}
+	}
+}
+
+func TestPipeLineGet(t *testing.T) {
+
+	ctx := context.Background()
+	uids := []int64{1, 2, 4}
+	pipeLine := RedisDB.Pipeline()
+
+	for _, uid := range uids {
+		key := fmt.Sprintf("aa:%d", uid)
+		pipeLine.Get(ctx, key)
+	}
+
+	res, err := pipeLine.Exec(ctx)
+	if err != nil && err != redis.Nil {
+		fmt.Printf("err:%v\n", err)
+	}
+	valList := make([]int64, len(uids))
+	for idx, cmdResTmp := range res {
+		cmdRes, ok := cmdResTmp.(*redis.StringCmd)
+		if ok {
+			if result, err := cmdRes.Result(); err == nil {
+				valList[idx] = cast.ToInt64(result)
+				continue
+			}
+		}
+		valList[idx] = -1
 	}
 }

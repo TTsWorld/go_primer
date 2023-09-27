@@ -8,6 +8,8 @@
       <module fileurl="file://$PROJECT_DIR$/../o_code/go-gin-example/.idea/go-gin-example.iml" filepath="$PROJECT_DIR$/../o_code/go-gin-example/.idea/go-gin-example.iml" />
       <module fileurl="file://$PROJECT_DIR$/../m_code/go_deep/.idea/go_deep.iml" filepath="$PROJECT_DIR$/../m_code/go_deep/.idea/go_deep.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/go_primer.iml" filepath="$PROJECT_DIR$/.idea/go_primer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../go_test/.idea/go_test.iml" filepath="$PROJECT_DIR$/../go_test/.idea/go_test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../o_code/grpc-demo/.idea/grpc-demo.iml" filepath="$PROJECT_DIR$/../o_code/grpc-demo/.idea/grpc-demo.iml" />
     </modules>
   </component>
 </project>

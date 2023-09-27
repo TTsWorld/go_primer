@@ -1,0 +1,115 @@
+syntax = "proto3";
+package grpc.api;
+
+option java_package = "com.mico.provider.grpc.api";
+option go_package = "./grpc";
+import "rsp_head.proto";
+
+service UserService {
+  /**
+   * 查询用户等级
+   */
+  rpc queryUserGrade(QueryUserGradeRequest) returns (QueryUserGradeResponse);
+  /**
+   * 查询用户基础信息
+   */
+  rpc queryUserBasicInfo(QueryUserBasicInfoRequest) returns (QueryUserBasicResponse);
+
+  rpc queryUserDetailList(QueryUserDetailListRequest) returns (QueryUserDetailListResponse);
+
+  rpc queryUserActivityTimeList(QueryUserActivityTimeRequest) returns (QueryUserActivityTimeResponse);
+
+}
+message QueryUserGradeRequest{
+   //用户id
+  int64 uid = 1;
+}
+
+message QueryUserBasicInfoRequest{
+   //用户id
+  int64 uid = 1;
+}
+
+message QueryUserGradeResponse {
+  RspHead rspHead = 1;
+  // 用户等级
+  int32 userGrade = 2;
+}
+
+message QueryUserBasicResponse{
+  RspHead rspHead = 1;
+  // 用户id
+  int32 userId = 2;
+  // 国家
+  string country = 3;
+  // 平台
+  int32 platform = 4;
+  // 昵称
+  string nickname = 5;
+  // 用户头像
+  string avatar = 6;
+  // 状态
+  int32 status = 7;
+  // 性别
+  int32 gender = 8;
+  // 用户等级
+  int32 userGrade = 9;
+  // 贵族特权
+  int32 noble = 10;
+  // 是否是vip
+  bool isVip = 11;
+  // 是否认证
+  bool signVJ = 12;
+}
+
+message QueryUserDetailListRequest{
+  //用户id
+  repeated int64 uid = 1;
+}
+
+message QueryUserDetailListResponse{
+  RspHead rspHead = 1;
+  repeated UserDetail userDetailList = 2;
+}
+
+message UserDetail {
+  // 用户id
+  int64 uid = 2;
+  // 性别
+  int32 gender = 3;
+  // 昵称
+  string nickname = 4;
+  // 是否vip
+  bool isVip = 5;
+  //micoId
+  int32 userId = 6;
+  // 头像
+  string avatar = 7;
+  // 地区
+  string locale = 8;
+  // 国家
+  string country = 9;
+  //经度
+  float longitude = 10;
+  //纬度
+  float latitude = 11;
+  // 时区
+  int32 timezone = 12;
+  // 语言
+  string language = 13;
+}
+
+message QueryUserActivityTimeRequest {
+  repeated int64 uid = 1;
+}
+
+message QueryUserActivityTimeResponse {
+  RspHead rspHead = 1;
+  repeated UserActivityTimeInfo userActivityTimeList = 2;
+}
+
+message UserActivityTimeInfo {
+  int64 uid = 1;
+  // 用户最后一次活跃时间
+  int64 lastActivityTime = 2;
+}

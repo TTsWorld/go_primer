@@ -1,0 +1,194 @@
+syntax = "proto3";
+package grpc.api;
+
+option java_multiple_files = true;
+option go_package = "./grpc";
+option java_package = "com.mico.provider.grpc.api";
+import "rsp_head.proto";
+
+service GiftService {
+  // 送幸运礼物
+  rpc sendLuckyGift(SendGiftRequest) returns (SendGiftResponse);
+  // 送私人订制礼物
+  rpc sendPrivateCustomGift(SendGiftRequest) returns (SendGiftResponse);
+  // 批量查询礼物接口
+  rpc getLiveGiftList(GetLiveGiftRequest) returns (LiveGiftResponse);
+}
+
+message GetLiveGiftRequest{
+  repeated int32 giftIds = 1;
+}
+
+message LiveGiftResponse{
+  RspHead rspHead = 1;
+  repeated LiveGift liveGifts = 2;
+}
+
+message LiveGift{
+  int64 id = 1; // 礼物id
+  string name = 2; // 礼物名称
+  int32 price = 3; // 礼物价格
+  int32 exp = 4; // 礼物经验
+  int32 giftTag = 5; // 礼物分类
+  int32 giftType = 6; // 礼物类型
+  int32 position = 7; // 礼物排序位置
+  string effect = 8; // 礼物zip文件
+  string effectMd5 = 9; // 礼物zip文件md5
+  string mp4 = 10; // 礼物动效 mp4 zip文件
+  string mp4Md5 = 11; // 礼物动效 mp4 md5
+  string image = 12; // 礼物礼物图片
+  string cover = 13; // 礼物面板展示图
+  int32 attrType = 14; // 礼物属性
+  string extend = 15; // 扩展属性
+  int32 platform = 16; // 礼物平台
+  string country = 17; // 礼物国家
+  int32 size = 18;
+  int32 music = 19; // 是否音乐礼物
+  int32 lucky = 20; // 是否幸运礼物
+  int32 world = 21; // 是否世界礼物
+  int32 big = 22; // 是否大礼物
+}
+
+message SendGiftRequest{// 送礼请求参数
+
+  int64 fromUid = 1;   // 送礼方uid
+  int64 toUid = 2;     // 收礼方uid
+  int32 giftId = 3;    // 礼物id
+  int64 roomId = 4;    // 房间id
+  int32 count = 5;     // 连送数量
+  int32 seqId = 6;     // seqId
+  bool isGuard = 7;    // 送礼方是否守护了收礼方
+  SourceType sourceType = 8; // 送礼来源
+  string extend = 9;   //额外信息(私人订制礼物 privateCustomGiftRecordId 送礼纪录id)
+}
+
+message SendGiftResponse{// 送幸运礼物响应参数
+  // 公共响应头
+  RspHead rspHead = 1;
+  // 幸运礼物
+  oneof data {
+    SendLuckyGiftResponse sendLuckyGiftResponse = 2;// 送幸运礼物响应值
+    SendPrivateCustomGiftResponse sendPrivateCustomGiftResponse = 3;// 送幸运礼物响应值
+  }
+}
+
+message SendLuckyGiftResponse{
+  int64 costCoin = 1;     // 送礼者消费的金币数
+  int64 currentCoin = 2;  // 送礼者剩余的金币数
+  int64 addedDiamond = 3; // 主播增加的钻石数
+  int64 currentDiamond = 4; // 主播当前的钻石数
+  int64 totalDiamond = 5; // 主播累计的钻石数
+  Grade sendUserGrade = 6;
+  bool sendUserGradeUpdate = 7; // 送礼用户财富等级是否升级
+  Grade recvUserGrade = 8;
+  bool recvUserGradeUpdate = 9; //收礼主播等级是否升级
+  Gift gift = 10;
+  int32 count = 11; // 成功送礼的数量
+  int32 seqId = 12;
+  bool isSuperMoment = 13;// 是否开启了超级时刻
+  int64 totalWinCoins = 14;     // 总中奖金币数
+  repeated DrawLotteryResult drawLotteryResult = 15; // 幸运礼物奖励详情
+  int32 lucky_gift_floating_screen_threshold  = 16; // 幸运礼物飘屏阈值
+  int32 lucky_gift_barrage_threshold  = 17; // 幸运礼物弹幕阈值
+}
+
+message SendPrivateCustomGiftResponse{
+  int64 costCoin = 1;     // 送礼者消费的金币数
+  int64 currentCoin = 2;  // 送礼者剩余的金币数
+  int64 addedDiamond = 3; // 主播增加的钻石数
+  int64 currentDiamond = 4; // 主播当前的钻石数
+  int64 totalDiamond = 5; // 主播累计的钻石数
+  Grade sendUserGrade = 6;
+  bool sendUserGradeUpdate = 7; // 送礼用户财富等级是否升级
+  Grade recvUserGrade = 8;
+  bool recvUserGradeUpdate = 9; //收礼主播等级是否升级
+  Gift gift = 10;
+  int32 count = 11; // 成功送礼的数量
+  int32 seqId = 12;
+}
+
+// 送礼来源
+enum SourceType{
+  UNKNOWN = 0;           // 未知
+  GAME_LIVE = 1;         // 游戏直播
+  PK_LIVE = 2;           // PK
+  GUEST_CALL = 3;        // 连麦
+  NORMAL_LIVE = 4;       // 正常直播
+  AUDIO_LIVE = 5;        // 语音直播
+  CHAT = 6;              // 聊天
+  VOTE_LIVE = 7;         // 投票
+  LIVE_PARTY_HOST = 8;   // 在自己的房间收礼
+  LIVE_PARTY_GUEST = 9;  // 在别人的房间麦位收礼
+}
+
+enum LuckyGiftWinLevel {
+  kNotWin                                                = 0;
+  kNormalWin                                             = 1;
+  kBigWin                                                = 2;
+  kSuperWin                                              = 3; // 500times
+  kSuper2WinTop                                          = 4; // 1000times
+}
+
+message DrawLotteryResult{
+  bool win = 1;          // 是否中奖
+  int32 amount = 2;      // 中奖金额
+  int32 multiple = 3;    // 中奖倍数
+  LuckyGiftWinLevel win_level = 4;   // 中奖级别
+}
+
+// 等级信息
+message Grade{
+  int64 uid = 1;
+  int64 userScore = 2;                    // 用户等级分数
+  int32 userGrade = 3;                       // 用户等级
+  int64 marginScore2nextUserGrade = 4;       // 离下一用户等级差多少分
+  int64 wealthScore = 5;                     // 财富等级分数
+  int32 wealthGrade = 6;                     // 财富等级
+  int64 marginScore2nextWealthGrade = 7;     // 离下一财富等级差多少分
+  int64 anchorScore = 8;                     // 主播等级分数
+  int32 anchorGrade = 9;                     // 主播等级
+  int64 marginAnchor2nextAnchorGrade = 10;    // 离下一主播等级差多少分
+}
+
+// 礼物信息
+message Gift {
+  int32 giftId = 1; // 礼物ID
+  int32 price = 2; // 金币价格
+  string image = 3; // 礼物链接
+  string name = 4; // 礼物名称
+  int32 gift_type = 5; // 礼物类型
+  string effect = 6; // 礼物动效
+  string effectMd5 = 7; // 礼物动效md5
+  int32 attr_type = 8; // 礼物分类
+  bool isBigGift = 9; // 是否大礼物
+  bool isShortcut = 10; // 是否快捷礼物
+  bool isMusic = 11;            // 是否音乐礼物
+  bool isLucky = 12; // 是否幸运礼物
+  bool isGlobal = 13; // 是否世界礼物
+  int32 silver_price = 14; // 银币价格
+  string webp_url = 15; // 礼物特效web文件
+  int32 hitNum = 16; // 企鹅礼物打击次数
+  string mp4 = 17; // 礼物动效(mp4)
+  string mp4Md5 = 18; // 礼物动效md5(mp4)
+  string country = 19;          // 礼物国家
+}
+
+
+/*
+ 异常列表：
+    幸运礼物：
+      21801：礼物资源不存在
+      21809：给自己送礼
+      21803：余额不足
+      21811：礼物类型错误（不是幸运礼物）
+      21812：区域未开放
+
+      218xx
+*/
+
+
+
+
+
+
+

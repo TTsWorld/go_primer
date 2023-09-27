@@ -1,0 +1,31 @@
+syntax = "proto2";
+package mico.msg.proxy;
+
+option go_package = "./grpc";
+
+message PushUser
+{
+    optional int64 toUid = 1;
+    optional int32 platform = 2;
+}
+
+// topic: notify
+message PushMsg 
+{
+    required int64 fromUid = 1;//
+    repeated int64 toUids = 2;//
+    optional string msg = 3;//
+    repeated PushUser toUsers = 4;//
+}
+
+// topic: new_notify
+message PushNotify
+{
+    required int64 fromUid = 1;
+    repeated int64 toUids = 2;
+    optional int32 sys_notify_biz = 3; /* 家族=10 */
+    optional int32 sys_notify_classify = 4; /* classify 和客户端协商 */
+    optional bool have_offline = 5; /* 是否带离线消息 */
+    optional bool have_push = 6; /* 是否push(目前还不支持) */
+    optional string content = 7; /* 推送内容 和客户端协商 */
+}

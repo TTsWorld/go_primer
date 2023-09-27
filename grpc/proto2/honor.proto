@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.mico.provider.grpc.api";
+option go_package = "./grpc";
+
+
+service HonorService {
+  rpc getUserWearMedal (GetUserWearMedalRequest) returns (GetUserWearMedalResponse) {} // 获取用户佩戴的勋章
+}
+
+message GetUserWearMedalRequest {
+  int64 uid = 1; // 用户uid
+}
+
+message GetUserWearMedalResponse {
+  repeated UserWearMedal UserWearMedal = 1; // 勋章信息
+}
+
+message UserWearMedal{
+  int32 mid = 1; // 勋章id
+  string effectImg = 2; // 勋章图片
+}

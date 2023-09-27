@@ -146,5 +146,13 @@ func TestHMset(t *testing.T) {
 	res2, err2 := RedisDB.HSet(Gctx, "ac1a", setMap).Result()
 	fmt.Printf("HSet res:%+v , err:%+v", res1, err1)
 	fmt.Printf("HSet res:%+v , err:%+v", res2, err2)
+}
 
+func TestHset(t *testing.T) {
+	res1, err1 := RedisDB.HSet(Gctx, "a2aa", 1, 1).Result()
+	fmt.Printf("HSet res:%+v , err:%+v\n", res1, err1)
+	res2, err2 := RedisDB.HSet(Gctx, "a2aa", 1, 2).Result()
+	fmt.Printf("HSet res:%+v , err:%+v\n", res2, err2)
+	res2, err2 = RedisDB.HSet(Gctx, "a2aa", 1, 3).Result()
+	fmt.Printf("HSet res:%+v , err:%+v", res2, err2)
 }

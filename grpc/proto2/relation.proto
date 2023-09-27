@@ -1,0 +1,45 @@
+syntax = "proto3";
+package grpc.api;
+
+option java_multiple_files = true;
+option java_package = "com.mico.provider.grpc.api";
+option go_package = "./grpc";
+
+import "rsp_head.proto";
+
+service RelationService {
+  rpc getCountOfNewFans (GetCountOfNewFansRequest) returns (GetCountOfNewFansResponse) {} // 批量获取主播新增粉丝数
+  rpc getRelationUserByType (GetRelationUserByTypeReq) returns (GetRelationUserByTypeResp) {} // 分页查询用户关系列表
+}
+message GetCountOfNewFansRequest {
+  repeated int64 vjUids = 1; // 主播uid
+  int64 startTime = 2; //开始时间
+  int64 endTime = 3; //结束时间
+}
+
+message GetCountOfNewFansResponse {
+  // 公共响应头
+  RspHead rspHead = 1;
+  map<int64, int64> countOfNewFans = 2;
+}
+
+
+message GetRelationUserByTypeReq{
+  int64 uid = 1;
+  // 关系创建时间
+  int64 createTime = 2;
+  int32 size = 3;
+  // 关系类型 1关注 2拉黑 3好友 4粉丝
+  int32 type = 4;
+}
+
+message RelationUser {
+  int64 uid = 1;
+  int64 createTime = 2;
+}
+
+message GetRelationUserByTypeResp {
+  RspHead rspHead = 1;
+  repeated int64 uids = 2;
+  int64 lastCreateTime = 3;
+}

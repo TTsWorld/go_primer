@@ -1,0 +1,21 @@
+syntax = "proto3";
+package grpc.api;
+
+option java_package = "com.mico.provider.grpc.api";
+option go_package = "./grpc";
+
+import "rsp_head.proto";
+
+service TokenService{
+    rpc tokenCheck(TokenCheckRequest) returns (TokenCheckResponse);
+}
+
+message TokenCheckRequest{
+  int64 uid = 1;
+  string token = 2;
+}
+
+message TokenCheckResponse{
+  RspHead rspHead = 1; // 公共响应头
+  bool effective = 2; // 是否有效
+}

@@ -2,6 +2,7 @@ package go_redis
 
 import (
 	"context"
+
 	"github.com/go-redis/redis/v8"
 )
 
@@ -10,7 +11,7 @@ var Gctx context.Context
 
 func init() {
 	RedisDB = redis.NewClient(&redis.Options{
-		Addr:     "localhost:6380",
+		Addr:     "localhost:6379",
 		Password: "",
 		DB:       0,
 	})

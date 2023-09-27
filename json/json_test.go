@@ -19,5 +19,4 @@ func TestName(t *testing.T) {
 	arr = append(arr, &User{Name: "cc", Age: "cc"})
 	v, _ := json.Marshal(arr)
 	fmt.Println(string(v))
-
 }

@@ -1,6 +1,7 @@
 package map_t
 
 import (
+	"encoding/json"
 	"fmt"
 	"testing"
 )
@@ -34,4 +35,45 @@ func TestMapForRandom(t *testing.T) {
 		println(k)
 	}
 
+}
+
+func TestMapAppend(t *testing.T) {
+	a := make([]map[string]interface{}, 0)
+	for i := 0; i < 10; i++ {
+		t := map[string]interface{}{"a": i}
+		a = append(a, t)
+	}
+	fmt.Println(a)
+}
+
+var EcsInstanseId = []string{
+	"i-t4n317o78w5nmej9jvgu",
+	"i-t4n317o78w5nmej9jvgt",
+	"i-t4n7bqi0f5qntqwd09so",
+	"i-t4n7bqi0f5qntqwd09sp",
+	"i-t4nb2htfd1lvjs335e1c",
+	"i-t4n0fketd6fmatdcvdrc",
+	"i-t4n0pyibci9cyq59njka",
+	"i-t4n4d6gh513ac69lxynj",
+	"i-t4n0fketd6fmatdcvdra",
+	"i-t4n57y7u94v29li2u9by",
+	"i-t4n0fketd6fmatdcvdrb",
+	"i-t4n1mp121g05m0ohlf0q",
+}
+
+func TestMapAppend2(t *testing.T) {
+	arr := make([]map[string]string, 0)
+
+	for _, instanceId := range EcsInstanseId {
+		t := map[string]string{"instanceId": instanceId}
+		arr = append(arr, t)
+	}
+	v, _ := json.Marshal(arr)
+	fmt.Println(string(v))
+}
+
+func TestGetUnExistsElement(t *testing.T) {
+	arr := make(map[string]string)
+
+	fmt.Println(arr["a"])
 }

@@ -1,0 +1,44 @@
+syntax = "proto3";
+package grpc.api;
+
+option java_multiple_files = true;
+option java_package = "com.mico.provider.grpc.api";
+option go_package = "./grpc";
+
+import "rsp_head.proto";
+
+service CurrencyService {
+    //查询用户mico金币
+    rpc queryUserCoinBalance(QueryUserCoinBalanceRequest) returns (QueryUserCoinBalanceResponse);
+    
+    // 扣减mico金币
+    rpc decreaseUserCoins(DecreaseUserCoinsRequest) returns (DecreaseUserCoinsResponse);
+}
+
+
+message QueryUserCoinBalanceRequest {
+    int64 uid = 1;
+}
+
+message QueryUserCoinBalanceResponse {
+    RspHead rspHead = 1;
+    // 余额
+    int64 amount = 2;
+}
+
+
+message DecreaseUserCoinsRequest {
+  int64 uid = 1;
+  // 扣减数量
+  int64 amount = 2;
+  // 场景类型, 汽车大亨：15
+  int32 functionType = 3;
+  // 唯一id，防重发
+  string seqId = 4;
+}
+
+message DecreaseUserCoinsResponse {
+    RspHead rspHead = 1;
+    // 扣减后余额
+    int64 amount = 2;
+}

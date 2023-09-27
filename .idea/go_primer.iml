@@ -10,5 +10,7 @@
     <orderEntry type="module" module-name="go-gin-api" />
     <orderEntry type="module" module-name="go-gin-example" />
     <orderEntry type="module" module-name="go_deep" />
+    <orderEntry type="module" module-name="grpc-demo" />
+    <orderEntry type="module" module-name="go_test" />
   </component>
 </module>

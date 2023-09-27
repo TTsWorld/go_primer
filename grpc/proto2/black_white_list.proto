@@ -1,0 +1,116 @@
+syntax = "proto3";
+package grpc.api;
+
+option java_multiple_files = true;
+option java_package = "com.mico.provider.grpc.api";
+option go_package = "./grpc";
+
+import "rsp_head.proto";
+
+service BlackWhiteListOperationService {
+  // 新增黑名单
+  rpc addLiveHouseBlackList(AddLiveHouseBlackListRequest) returns (AddLiveHouseBlackListResponse);
+  // 根据黑白名单类型id查询所有名单
+  rpc listByTypeId(ListByTypeIdRequest) returns (ListByTypeIdResponse);
+  // 根据传的内容及黑白名单类型查询内容是否在黑白名单内
+  rpc isInList(IsInListRequest) returns (IsInListResponse);
+}
+
+/**
+   添加黑名单请求参数
+   1、livehouse黑名单参数：
+      blackWhiteListTypeId : 1
+      content : userId 字符串
+      type : BlackWhiteListType.blackList
+ */
+message AddLiveHouseBlackListRequest{//
+
+  string content = 1;   // 封禁对象内容 userIdStr\uidStr\ipStr\设备
+  int32 blackWhiteListTypeId = 2;   // 名单类型id
+  int64 validityPeriod = 3;    // 封禁时长 毫秒
+  string country = 4; // 国家
+  string region = 5;  // 大区
+  BlackWhiteListType type = 6; // 1-黑名单 2-白名单
+}
+
+message AddLiveHouseBlackListResponse{//
+  // 公共响应头
+  RspHead rspHead = 1;
+  bool result = 2;
+}
+/**
+   根据黑白名单类型id查询所有名单 请求参数
+   1、livehouse黑名单参数：
+      blackWhiteListTypeId : 1
+ */
+message ListByTypeIdRequest{
+  int32 blackWhiteListTypeId = 1;// 名单类型id
+}
+
+message ListByTypeIdResponse{//
+  // 公共响应头
+  RspHead rspHead = 1;
+  repeated BlackWhiteList result = 2;
+}
+
+/**
+ * 根据传的内容及黑白名单类型查询内容是否在黑白名单内 请求参数
+ * 1、livehouse黑名单：
+ * content : userId 字符串
+ * blackWhiteListTypeId : 1
+ */
+message IsInListRequest{
+  string content = 1; // 内容
+  int32 blackWhiteListTypeId = 2;// 名单类型id
+}
+
+/**
+ * 根据传的内容及黑白名单类型查询内容是否在黑白名单内 返回值
+ */
+message IsInListResponse{//
+  // 公共响应头
+  RspHead rspHead = 1;
+  bool isIn = 2; // 是否在名单内
+  BlackWhiteList result = 3; //  在名单内返回实体，不在则Null
+}
+
+/**
+  黑名单实体类：
+  （注）validityPeriod 为到期时间戳 毫秒
+  1、livehouse黑名单：
+    content : userId 字符串
+
+ */
+message BlackWhiteList{
+  int32 id = 1;     // id
+  BlackWhiteListType type = 2; // 1-黑名单 2-白名单
+  string content = 3;  // userIdStr\uidStr\ipStr\设备
+  int32 blackWhiteListTypeId = 4; // 名单类型id
+  int64 validityPeriod = 5; // 到期时间 毫秒
+}
+
+
+enum BlackWhiteListType {
+  unknown = 0;
+  blackList  = 1; // 黑名单
+  whiteList = 2; // 白名单
+}
+
+
+
+/*
+ 异常列表：
+     2271 参数异常
+	 2272 不支持功能类型
+	 2273 不支持名单类型
+	 2274 操作频繁
+
+      227xx
+*/
+
+
+
+
+
+
+

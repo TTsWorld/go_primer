@@ -3,9 +3,10 @@ package go_redis
 import (
 	"context"
 	"fmt"
-	"github.com/spf13/cast"
 	"testing"
 	"time"
+
+	"github.com/spf13/cast"
 )
 
 func TestLua1(t *testing.T) {
@@ -96,11 +97,37 @@ func TestZincry(t *testing.T) {
 		fmt.Printf("score:%v \n", int64(rdsZ.Score))
 	}
 }
+
 func TestZincryFIFO(t *testing.T) {
 	after, err := RedisZIncryByFIFO("z", "2", 100, time.Now().Unix(), time.Minute*10)
 	if err != nil {
 		fmt.Println(err)
 	}
 	fmt.Println(after)
+
+}
+
+func TestLua01(t *testing.T) {
+	key := "d30key"
+	vc := "10000"
+	d30VcLua := `if redis.call('EXISTS', KEYS[1]) == 0 then
+							return 0
+						else
+                            local vc = redis.call('HGET', KEYS[1], ARGV[1]);
+							if vc == false or vc == ''  then
+								local count = redis.call('HSET', KEYS[1], ARGV[1], ARGV[2]);
+                                redis.call('EXPIRE', KEYS[1], ARGV[3]);
+								return count
+							else
+								return 0;
+							end
+						end
+	`
+
+	result, err := RedisDB.Eval(context.Background(), d30VcLua, []string{key}, []string{"d30VC", vc, cast.ToString(30 * 86400)}).Result()
+	if err != nil {
+		fmt.Printf("Updatad30Value||Eval failed, key:%s, result:%s, err:%v", key, result, err)
+	}
+	fmt.Printf("Updatad30Value||Eval success, key:%s, result:%s, result:%v", key, result, result)
 
 }

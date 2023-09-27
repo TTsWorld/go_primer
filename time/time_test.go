@@ -28,3 +28,11 @@ func TestTimeParse(t *testing.T) {
 	fmt.Printf("%+v", tt)
 
 }
+
+func Test0202(t *testing.T) {
+	tm, _ := time.ParseInLocation(time.DateOnly, "2023-09-12", time.UTC)
+	fmt.Println(GetZeroTime(tm))
+	fmt.Println(GetZeroTime(time.Now().In(time.UTC)))
+	fmt.Println(GetZeroTime(time.Now().In(time.UTC)).Sub(GetZeroTime(tm)).Hours() / 24)
+
+}

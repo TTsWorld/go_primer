@@ -1,0 +1,33 @@
+syntax = "proto3";
+package grpc.api;
+
+option java_multiple_files = true;
+option java_package = "com.mico.provider.grpc.api";
+option go_package = "./grpc";
+
+import "rsp_head.proto";
+
+service SpamAccountService {
+  // 检测是否可获得新手奖励
+  rpc checkRewardsStatus(CheckRewardsStatusRequest) returns (SpamAccountResponse);
+}
+
+message CheckRewardsStatusRequest{
+  int64 uid = 1;   // 用户uid
+}
+
+message SpamAccountResponse{
+  // 公共响应头
+  RspHead rspHead = 1;
+  oneof data {
+    // 用户是否可领取奖励
+    CheckRewardsStatusResponse checkRewardsStatusResponse = 2;
+  }
+}
+
+message CheckRewardsStatusResponse{
+  bool canReward = 1; // 奖励是否可用
+}
+
+
+

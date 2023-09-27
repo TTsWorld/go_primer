@@ -1,0 +1,24 @@
+syntax = "proto3";
+package grpc.api;
+
+option java_multiple_files = true;
+option go_package = "./grpc";
+option java_package = "com.mico.provider.grpc.api";
+import "rsp_head.proto";
+
+service UserCarIcon{
+  /**
+  * 获取用户车辆 icon
+  */
+  rpc GetUserCarIcon(UserCarIconRequest) returns (UserCarIconResponse);
+}
+
+message UserCarIconRequest{
+  // uid
+  int64 uid = 1;
+}
+
+message UserCarIconResponse{
+  RspHead rspHead = 1;
+  string icon = 2; //头像地址
+}
