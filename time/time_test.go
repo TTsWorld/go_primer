@@ -36,3 +36,35 @@ func Test0202(t *testing.T) {
 	fmt.Println(GetZeroTime(time.Now().In(time.UTC)).Sub(GetZeroTime(tm)).Hours() / 24)
 
 }
+
+func Test0301(t *testing.T) {
+	GetWeekEndTime(time.Now().UnixMilli(), 8*3600)
+}
+
+func TestUnix(t *testing.T) {
+	tm := time.Now()
+	utm := tm.UTC()
+	//时间戳格式化为本地时间，需要加上本地时间和 utc0的时区差，或将时区设置为本地
+	fmt.Println(tm)                                                //本地时间
+	fmt.Println(tm.UTC())                                          //UTC时间
+	fmt.Println(tm.Unix())                                         //本地时间时间戳
+	fmt.Println(tm.UTC().Unix())                                   //UTC时间时间戳
+	fmt.Println(tm.UTC().Add(time.Hour * 8).Format(time.DateTime)) //utc时间 -> 格式化为本地时间
+	fmt.Println(tm.UTC().In(tm.Location()).Format(time.DateTime))  //utc时间 -> 格式化为本地时间
+
+	fmt.Println("===============")
+	tstr := time.Now().Format(time.DateTime)
+	fmt.Println(tstr)                            //时间串
+	fmt.Println(time.Parse(time.DateTime, tstr)) //默认解析为 utc
+	fmt.Println(time.ParseInLocation(time.DateTime, tstr, tm.Location()))
+	fmt.Println(time.ParseInLocation(time.DateTime, tstr, utm.Location()))
+
+	//本地时间串获取 unix 时间戳, parse完后是对应时区的时间串对应的时间
+	t1, _ := time.Parse(time.DateTime, tstr)
+	t2, _ := time.ParseInLocation(time.DateTime, tstr, tm.Location())
+	t3, _ := time.ParseInLocation(time.DateTime, tstr, utm.Location())
+	fmt.Println(t1.Add(-time.Hour * 8).Unix()) //时间串
+	fmt.Println(t2.Unix())                     //时间串
+	fmt.Println(t3.Unix())                     //时间串
+
+}

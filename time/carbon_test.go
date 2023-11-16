@@ -3,6 +3,7 @@ package mtime
 import (
 	"fmt"
 	"testing"
+	"time"
 
 	"github.com/golang-module/carbon"
 )
@@ -60,4 +61,23 @@ func TestCarbon4(t *testing.T) {
 	fmt.Println(carbon.Now().ToDateTimeString())
 	fmt.Println(carbon.Now().AddHours(20).ToDateTimeString())
 	fmt.Println(carbon.Now().DiffAbsInDays(carbon.Now().AddHours(20)))
+}
+
+func TestCarbon5(t *testing.T) {
+	fmt.Println(carbon.Now().StartOfWeek())
+	fmt.Println(carbon.Now().EndOfWeek())
+	fmt.Println(carbon.Now().StartOfWeek().Second())
+	fmt.Println(carbon.Now().EndOfWeek().Year())
+	fmt.Println(carbon.Now().EndOfWeek().Month())
+	fmt.Println(carbon.Now().EndOfWeek().Day())
+	fmt.Println(time.Now().Weekday())
+}
+func TestCarbon6(t *testing.T) {
+	c := carbon.CreateFromTimestampMilli(1700031300000)
+	//fmt.Println(c.ToDateTimeString(carbon.UTC))
+
+	c = carbon.Parse("2023-11-03 02:40:05", carbon.UTC)
+	fmt.Println(c.ToDateTimeString(carbon.UTC))
+	fmt.Println(c.ToDateTimeString(carbon.Shanghai))
+	fmt.Println(c.TimestampMilli())
 }

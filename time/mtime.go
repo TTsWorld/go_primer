@@ -191,3 +191,18 @@ func GetTodayTimeLeft() int64 {
 }
 
 var HourMinuteSecondsLayout = "15:04:000"
+
+func GetWeekEndTime(now int64, tz_seconds int) int64 {
+	localtime := now/1000 + int64(tz_seconds)
+	tm := time.Unix(localtime, 0).In(time.UTC)
+
+	offset := int(time.Monday - tm.Weekday())
+	if offset > 0 {
+		offset = -6
+	}
+	//sunday
+	in := tm.AddDate(0, 0, offset+6)
+	out := time.Date(in.Year(), in.Month(), in.Day(), 23, 59, 59, 999, time.UTC)
+
+	return out.UnixMilli()
+}

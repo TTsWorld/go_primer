@@ -3,6 +3,7 @@ package map_t
 import (
 	"encoding/json"
 	"fmt"
+	"math/rand"
 	"testing"
 )
 
@@ -76,4 +77,14 @@ func TestGetUnExistsElement(t *testing.T) {
 	arr := make(map[string]string)
 
 	fmt.Println(arr["a"])
+}
+
+// 测试 map[string]map[string]int 结构添加过程中是否需要创建
+func TestMapAdd(t *testing.T) {
+	println("23:58:59.000" > "24:58:39.000")
+	for i := 0; i < 10; i++ {
+		randN := rand.Intn(1000)
+		println(randN)
+
+	}
 }

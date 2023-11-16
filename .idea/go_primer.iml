@@ -6,11 +6,12 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="7days-golang" />
-    <orderEntry type="module" module-name="datacenter" />
     <orderEntry type="module" module-name="go-gin-api" />
     <orderEntry type="module" module-name="go-gin-example" />
     <orderEntry type="module" module-name="go_deep" />
     <orderEntry type="module" module-name="grpc-demo" />
-    <orderEntry type="module" module-name="go_test" />
+    <orderEntry type="module" module-name="prometheus-demo" />
+    <orderEntry type="module" module-name="read_go_code" />
+    <orderEntry type="module" module-name="go_source_comment" />
   </component>
 </module>
