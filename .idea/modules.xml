@@ -3,14 +3,17 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../o_code/7days-golang/.idea/7days-golang.iml" filepath="$PROJECT_DIR$/../o_code/7days-golang/.idea/7days-golang.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../o_code/go/gin-vue-admin/.idea/gin-vue-admin.iml" filepath="$PROJECT_DIR$/../../../o_code/go/gin-vue-admin/.idea/gin-vue-admin.iml" />
       <module fileurl="file://$PROJECT_DIR$/../o_code/go-gin-api/.idea/go-gin-api.iml" filepath="$PROJECT_DIR$/../o_code/go-gin-api/.idea/go-gin-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/../o_code/go-gin-example/.idea/go-gin-example.iml" filepath="$PROJECT_DIR$/../o_code/go-gin-example/.idea/go-gin-example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../o_code/go/go-zero-looklook/.idea/go-zero-looklook.iml" filepath="$PROJECT_DIR$/../../../o_code/go/go-zero-looklook/.idea/go-zero-looklook.iml" />
       <module fileurl="file://$PROJECT_DIR$/../m_code/go_deep/.idea/go_deep.iml" filepath="$PROJECT_DIR$/../m_code/go_deep/.idea/go_deep.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/go_primer.iml" filepath="$PROJECT_DIR$/.idea/go_primer.iml" />
       <module fileurl="file://$PROJECT_DIR$/../m_code/go_source_comment/.idea/go_source_comment.iml" filepath="$PROJECT_DIR$/../m_code/go_source_comment/.idea/go_source_comment.iml" />
       <module fileurl="file://$PROJECT_DIR$/../o_code/grpc-demo/.idea/grpc-demo.iml" filepath="$PROJECT_DIR$/../o_code/grpc-demo/.idea/grpc-demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/../prometheus-demo/.idea/prometheus-demo.iml" filepath="$PROJECT_DIR$/../prometheus-demo/.idea/prometheus-demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/../m_code/read_go_code/.idea/read_go_code.iml" filepath="$PROJECT_DIR$/../m_code/read_go_code/.idea/read_go_code.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../o_code/go/zero-examples/.idea/zero-examples.iml" filepath="$PROJECT_DIR$/../../../o_code/go/zero-examples/.idea/zero-examples.iml" />
     </modules>
   </component>
 </project>

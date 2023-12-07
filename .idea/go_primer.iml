@@ -13,5 +13,7 @@
     <orderEntry type="module" module-name="prometheus-demo" />
     <orderEntry type="module" module-name="read_go_code" />
     <orderEntry type="module" module-name="go_source_comment" />
+    <orderEntry type="module" module-name="zero-examples" />
+    <orderEntry type="module" module-name="go-zero-looklook" />
   </component>
 </module>
