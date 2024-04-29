@@ -19,7 +19,7 @@ func TestSelect(t *testing.T) {
 	//if err != nil {
 	//	fmt.Printf("clickhouse open err %s", err.Error())
 	//}
-	//defer func() {
+	//defer_t func() {
 	//	_ = connect.Close()
 	//}()
 	//

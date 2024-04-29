@@ -18,14 +18,14 @@ func TestAtomicValue(t *testing.T) {
 	a := T{7, 7, 7}
 
 	var v atomic.Value
-	v.Store(x)
-	fmt.Println(v)
-	old := v.Swap(y)
-	fmt.Println(v)       // {{{4 5 6}} []}
-	fmt.Println(old.(T)) // {1 2 3}
+	v.Store(x)           //存入 x
+	fmt.Println(v)       //打印 v
+	old := v.Swap(y)     //用 y 替换 x，获得老值和存入新值
+	fmt.Println(v)       //  新值 :{{{4 5 6}} []}
+	fmt.Println(old.(T)) // 老值: {1 2 3}
 
-	swapped := v.CompareAndSwap(x, y)
-	fmt.Println(swapped, v) // false {{{4 5 6}} []}
+	swapped := v.CompareAndSwap(x, y) //  看 v 里的值跟 x 是否相等，相等返回 true，并替换为新的值 y ; 如果不相等，不进行替换，并返回 false
+	fmt.Println(swapped, v)           // false {{{4 5 6}} []}
 	swapped = v.CompareAndSwap(y, z)
 	fmt.Println(swapped, v) // true {{{7 8 9}} []}
 

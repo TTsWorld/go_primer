@@ -15,5 +15,7 @@
     <orderEntry type="module" module-name="go_source_comment" />
     <orderEntry type="module" module-name="zero-examples" />
     <orderEntry type="module" module-name="go-zero-looklook" />
+    <orderEntry type="module" module-name="go_interview" />
+    <orderEntry type="module" module-name="voicemaker-backend" />
   </component>
 </module>

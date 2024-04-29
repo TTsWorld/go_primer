@@ -9,6 +9,7 @@ import (
 func Test01(t *testing.T) {
 	a := make([]int, 10, 20)
 	b := a[5:]
+	println(len(a), cap(a)) // 10 20
 	println(len(b), cap(b)) // 5 15
 
 	//b [0]  = a[5] ,切片后的 slice 和原 slice 指向同一内存
@@ -43,6 +44,7 @@ func Test03(t *testing.T) {
 
 	fmt.Println(slice1) //[10,2,3]  ,因为 slice1 的 len 为 3，所以只能打出 3 个值
 	fmt.Println(slice2) //[10,2,3,4]
+	fmt.Println(slice1) //[10,2,3] // slice2 的 len=3, slice2 append只影响 slice2的 len
 
 }
 func Test04(t *testing.T) {
@@ -91,10 +93,12 @@ func TestSliceForRange(t *testing.T) {
 	b := []*int{}
 	for i, v := range a {
 		fmt.Printf("%d -- %d\n", i, v)
-		b = append(b, &i)
+		b = append(b, &v) //go for range，i-v 在循环遍历的时候是同一个变量
 	}
 	fmt.Println(*b[0], *b[1], *b[2])
-	fmt.Println(b)
+	// 可以看出每个元素的地址都相同
+	fmt.Printf("%v", b) //[0x1400000e358 0x1400000e358 0x1400000e358 0x1400000e358 0x1400000e358 0x1400000e358]--- PASS: TestSliceForRange (0.00s)
+
 }
 
 func TestSliceForRange02(t *testing.T) {

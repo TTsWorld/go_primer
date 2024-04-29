@@ -10,9 +10,13 @@ import (
 
 // 无缓冲队列的基本操作
 func Test0101(t *testing.T) {
-	ch := make(chan int)
-	ch = ch
-
+	ch := make(chan int, 1)
+	ch <- 1
+	go func() {
+		ch <- 1
+		println("xxx")
+	}()
+	time.Sleep(time.Second * 2)
 }
 
 // ====缓冲队列的基本操作
@@ -20,19 +24,39 @@ func Test0102(t *testing.T) {
 	var ch chan int
 	ch = make(chan int, 4)
 
-	ch <- 1
-	ch <- 2
-	ch <- 3
-	ch <- 4
-	close(ch)
+	wg := sync.WaitGroup{}
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		ch <- 1
+		ch <- 2
+		ch <- 3
+		ch <- 4
+		ch <- 5
+		close(ch)
+	}()
 
 	fmt.Printf("cap(ch)=%+v\n", cap(ch)) //获取 ch 的容量
 	fmt.Printf("len(ch)=%+v\n", len(ch)) //获取 ch 的有效元素个数
-	fmt.Printf("%+v\n", <-ch)            //1
-	fmt.Printf("%+v\n", <-ch)            //2
-	fmt.Printf("%+v\n", <-ch)            //3
-	fmt.Printf("%+v\n", <-ch)            //4
-	fmt.Printf("%+v\n", <-ch)            //0 //如果 channel 已关闭，则会消费到 0 值
+	for {
+		select {
+		case a, ok := <-ch:
+			fmt.Println(a)
+			fmt.Println(ok)
+			if !ok {
+				return
+			}
+		default:
+			fmt.Println("dddd")
+		}
+
+	}
+	wg.Wait()
+	fmt.Printf("%+v\n", <-ch) //1
+	fmt.Printf("%+v\n", <-ch) //2
+	fmt.Printf("%+v\n", <-ch) //3
+	fmt.Printf("%+v\n", <-ch) //4
+	fmt.Printf("%+v\n", <-ch) //0 //如果 channel 已关闭，则会消费到 0 值
 	fmt.Printf("cap(ch)=%+v\n", cap(ch))
 	fmt.Printf("len(ch)=%+v\n", len(ch))
 }

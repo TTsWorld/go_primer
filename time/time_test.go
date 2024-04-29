@@ -68,3 +68,9 @@ func TestUnix(t *testing.T) {
 	fmt.Println(t3.Unix())                     //时间串
 
 }
+
+func TestSomething(t *testing.T) {
+	now := time.Now().UTC()
+	nowHour := (now.Unix() - int64(now.Second()) - int64(now.Minute()*60)) * 1000
+	println(nowHour)
+}

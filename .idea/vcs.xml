@@ -3,6 +3,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/conn_poll/pool" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/go-labs" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../../../o_code/go/go-zero-looklook" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../../../o_code/go/zero-examples" vcs="Git" />
   </component>
