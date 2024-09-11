@@ -12,6 +12,9 @@ func TestReturn(t *testing.T) {
 	r2 := return02()
 	fmt.Println(r2.A)
 
+	r202 := return0202()
+	fmt.Println(r202.A)
+
 	r3 := return03()
 	fmt.Println(r3)
 
@@ -30,6 +33,10 @@ func return01() (r R) {
 
 func return02() (r *R) {
 	r = &R{}
+	return
+}
+
+func return0202() (r *R) {
 	return
 }
 

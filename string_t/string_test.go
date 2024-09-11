@@ -3,6 +3,7 @@ package string_t
 import (
 	"fmt"
 	"strconv"
+	"strings"
 	"testing"
 )
 
@@ -20,4 +21,10 @@ func TestString(t *testing.T) {
 	fmt.Printf("%+v\n", err)
 	println(a)
 
+}
+
+func TestSplit2(t *testing.T) {
+	s := ""
+	aa := strings.Split(s, ",")
+	fmt.Printf("%v, %v\n", aa, len(aa))
 }

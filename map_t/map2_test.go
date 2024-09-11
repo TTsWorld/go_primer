@@ -25,3 +25,28 @@ func TestMap2(t *testing.T) {
 		fmt.Printf("ConsumeClaim||dateMap:%+v \n", dateMap)
 	}
 }
+
+// 测试 mapvar 声明候是否需要 make 申请内存
+func Test0202(t *testing.T) {
+	var m map[int]int
+	m = make(map[int]int)
+	m[1] = 0
+	m[2] = 0
+	fmt.Printf("%+v", m)
+}
+
+type Data struct {
+	a int
+}
+
+// 测试 mapvar 声明候是否需要 make 申请内存
+func Test0203(t *testing.T) {
+
+	m := make(map[int]*Data)
+
+	if m[1] != nil {
+		fmt.Printf("%+v", *m[1])
+		return
+	}
+	fmt.Printf("%+v", m[1])
+}

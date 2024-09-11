@@ -36,6 +36,7 @@ func parseFile(file string) string {
 	if err != nil {
 		fmt.Println(err)
 	}
+	return ""
 }
 func TestM2(t *testing.T) {
 

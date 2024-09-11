@@ -88,3 +88,15 @@ func TestMapAdd(t *testing.T) {
 
 	}
 }
+
+func TestMapAdd2(t *testing.T) {
+	m := make(map[string][]int)
+	for i := 0; i < 10; i++ {
+		m["a"] = append(m["a"], i)
+	}
+	for i := 0; i < 10; i++ {
+		m["b"] = append(m["b"], i)
+	}
+	fmt.Printf("%+v", m)
+
+}
