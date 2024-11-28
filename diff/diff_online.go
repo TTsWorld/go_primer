@@ -1,27 +1,29 @@
 package diff
 
 import (
+	"github.com/sergi/go-diff/diffmatchpatch"
 	"strings"
 	"testing"
-
-	"github.com/sergi/go-diff/diffmatchpatch"
 )
 
-type DiffResp struct {
-	Diffs []diffmatchpatch.Diff
+type DiffData struct {
+	OriginText string   `json:"origin_text"`
+	ModifyText string   `json:"modify_text"`
+	AddText    []string `json:"add_text"`
+	DeleteText []string `json:"delete_text"`
 }
 
-func TestDiff(t *testing.T) {
+func DiffTextOnlie(origin, modify string) []DiffData {
 	dmp := diffmatchpatch.New()
 
-	text1 := "他仰起头望着我：「既然你婚前\n的房子\n不肯\n给，婚房又不想要，给我不就万事大吉了吗？」\n我还没来x得及拒绝，他又j加了\n一句：「你们女的情绪一上来就口不择言乱打人，其实不还是口是心非吗？说白了你最舍不得的不还得是我……」"
-
-	text2 := "他仰起头望着我a：「既然你婚前\n的房子\n不肯\n给，婚房又不想要。\n「给我不+++就万事大吉了吗？」\n我还没来得及拒绝 b ，\n , \n 他又加了一句：\n「你们女的情绪一上来就口不择言乱打人，其实不还是口是心非吗？\n「说白了你最舍不得的不还得是我……」"
-
 	arr := make([]DiffData, 0)
-	diffs := dmp.DiffMain(text1, text2, false)
+	diffs := dmp.DiffMain(origin, modify, false)
 	data := DiffData{}
 	for j, diff := range diffs {
+		dType := diff.Type
+		dText := diff.Text
+		print(dText)
+		print(dType)
 		if diff.Type == diffmatchpatch.DiffEqual {
 			if strings.Contains(diff.Text, "\n") {
 				splitText := strings.Split(diff.Text, "\n")
@@ -68,9 +70,6 @@ func TestDiff(t *testing.T) {
 						data = DiffData{}
 						continue
 					}
-					if s == "" {
-						continue
-					}
 					if i == len(splitText)-1 {
 						data.ModifyText = s
 						if strings.TrimSpace(s) != "" {
@@ -100,21 +99,17 @@ func TestDiff(t *testing.T) {
 			}
 		}
 	}
-	println("-------")
-	s := ""
-	for _, one := range arr {
-		println("++")
-		println(one.ModifyText)
-		println("++==")
-		s = s + one.ModifyText + "a"
-		println(s)
-		println("++==")
-	}
-	println(s)
-	//fmt.Printf("diffs: %v\n", diffs)
-	//fmt.Println("===========")
-	//fmt.Println(dmp.DiffPrettyText(diffs))
-	//fmt.Println("===========")
-	//fmt.Println(dmp.DiffPrettyHtml(diffs))
-	return
+	return arr
+}
+
+var (
+	origin, _ = ExtractText(C1)
+	modify, _ = ExtractText(C2)
+)
+
+func TestOnline(t *testing.T) {
+	//origin = "测试内容\n\n\n\n请勿操作 1821 测试内容请勿操作 182 什么玩意容请勿操作 1821 测试内容请勿操作 1821 测试内容请勿操作 1821 测试内"
+	//modify = " 测试内容\n\n\n\n 111111111111111111133333332222222222234444444\nfdsaf fdsaf fdafd fdsafda fdaf dsa"
+	a := DiffTextOnlie(origin, modify)
+	print(a)
 }

@@ -27,7 +27,7 @@ require (
 	github.com/orcaman/concurrent-map v1.0.0
 	github.com/sergi/go-diff v1.3.1
 	github.com/shopspring/decimal v1.3.1
-	github.com/spf13/cast v1.5.0
+	github.com/spf13/cast v1.7.0
 	github.com/stretchr/testify v1.9.0
 	github.com/wanmei002/grpc-learn/ch02 v0.0.0-20210621071145-1d5f7c75fb49
 	github.com/xuri/excelize/v2 v2.6.1
@@ -43,6 +43,7 @@ require (
 	go.uber.org/zap v1.24.0
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1
 	gonum.org/v1/gonum v0.11.0
+	google.golang.org/appengine v1.6.7
 	google.golang.org/grpc v1.59.0
 	google.golang.org/protobuf v1.31.0
 	gorm.io/driver/mysql v1.4.1
@@ -88,7 +89,6 @@ require (
 	github.com/joho/godotenv v1.3.0 // indirect
 	github.com/klauspost/compress v1.16.7 // indirect
 	github.com/klauspost/cpuid/v2 v2.0.9 // indirect
-	github.com/kr/pretty v0.3.1 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/microsoft/go-mssqldb v0.17.0 // indirect
