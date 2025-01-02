@@ -156,3 +156,8 @@ func TestHset(t *testing.T) {
 	res2, err2 = RedisDB.HSet(Gctx, "a2aa", 1, 3).Result()
 	fmt.Printf("HSet res:%+v , err:%+v", res2, err2)
 }
+
+func TestHGetAll(t *testing.T) {
+	data, err1 := RedisDB.HGetAll(Gctx, "a2aa").Result()
+	fmt.Printf("HSet res:%+v , err:%+v\n", data, err1)
+}

@@ -3,8 +3,6 @@ package test
 import (
 	"fmt"
 	"testing"
-
-	"github.com/mohae/deepcopy"
 )
 
 func TestAA(t *testing.T) {
@@ -32,11 +30,9 @@ type A struct {
 }
 
 func Test02(t *testing.T) {
-	a := &A{1, 1, C{1}}
-	b := deepcopy.Copy(a).(*A)
-	b.A = 2
-	b.C1.C = 2
-	fmt.Println(a)
-	fmt.Println(b)
+	var a = 1
+	var b = 2
+	c := fmt.Sprintf("aa:%[1]d:%[2]d", a, b)
+	fmt.Println(c)
 
 }

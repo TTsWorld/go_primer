@@ -5,6 +5,7 @@ import (
 	"io"
 	"net/http"
 	"testing"
+	"time"
 )
 
 // A fundamental concept in `net/http` servers is
@@ -79,11 +80,18 @@ func getBody(w http.ResponseWriter, req *http.Request) {
 	}
 }
 
+// GetBody默认为 nil，中间件可以考虑注入这个方法
+func sleep(w http.ResponseWriter, req *http.Request) {
+	time.Sleep(time.Minute)
+	fmt.Fprintf(w, "sleep over %d", 1)
+}
+
 func TestHttp(t *testing.T) {
 	http.HandleFunc("/hello", hello)
 	http.HandleFunc("/headers", headers)
 	http.HandleFunc("/read", readBodyOnce)
 	http.HandleFunc("/getbody", getBody)
+	http.HandleFunc("/sleep", sleep)
 
 	http.ListenAndServe(":8090", nil)
 }

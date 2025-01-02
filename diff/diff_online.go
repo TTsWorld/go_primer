@@ -3,7 +3,7 @@ package diff
 import (
 	"github.com/sergi/go-diff/diffmatchpatch"
 	"strings"
-	"testing"
+	"time"
 )
 
 type DiffData struct {
@@ -17,7 +17,8 @@ func DiffTextOnlie(origin, modify string) []DiffData {
 	dmp := diffmatchpatch.New()
 
 	arr := make([]DiffData, 0)
-	diffs := dmp.DiffMain(origin, modify, false)
+	dmp.DiffTimeout = time.Minute
+	diffs := dmp.DiffMain(modify, origin, false)
 	data := DiffData{}
 	for j, diff := range diffs {
 		dType := diff.Type
@@ -106,10 +107,3 @@ var (
 	origin, _ = ExtractText(C1)
 	modify, _ = ExtractText(C2)
 )
-
-func TestOnline(t *testing.T) {
-	//origin = "测试内容\n\n\n\n请勿操作 1821 测试内容请勿操作 182 什么玩意容请勿操作 1821 测试内容请勿操作 1821 测试内容请勿操作 1821 测试内"
-	//modify = " 测试内容\n\n\n\n 111111111111111111133333332222222222234444444\nfdsaf fdsaf fdafd fdsafda fdaf dsa"
-	a := DiffTextOnlie(origin, modify)
-	print(a)
-}

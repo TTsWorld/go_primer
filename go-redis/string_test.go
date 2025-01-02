@@ -41,7 +41,7 @@ func TestSet01(t *testing.T) {
 	//getset && setnx
 	//RedisDB.GetSet(str2, str2)
 }
-func TestMget(t *testing.T) {
+func TestMGet(t *testing.T) {
 	RedisDB.Set(Gctx, str3, str3, 0)
 	fmt.Printf("%#v\n", RedisDB.MGet(Gctx, str1, str2, str3, str4).String())
 	fmt.Printf("%#v\n", RedisDB.MGet(Gctx, str1, str2, str3, str4).Name())
