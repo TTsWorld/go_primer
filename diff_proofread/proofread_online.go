@@ -4,6 +4,7 @@ import (
 	"github.com/elliotchance/pie/v2"
 	"github.com/sergi/go-diff/diffmatchpatch"
 	"strings"
+	"time"
 	"unicode"
 )
 
@@ -32,6 +33,7 @@ type ProofreadResult struct {
 var filterWords = []string{"她", "他", "它"}
 var filterStarts = []string{"•"}
 var DeDeDeFilter = []string{"的", "地", "得"}
+var PunctFilter = []string{"...", "......", "…", "……"}
 
 func ProofReadText(origin, modify string) []ProofreadResult {
 	arr := make([]ProofreadResult, 0)
@@ -44,6 +46,7 @@ func ProofReadText(origin, modify string) []ProofreadResult {
 	dmp := diffmatchpatch.New()
 	item := ProofreadResult{}
 
+	dmp.DiffTimeout = time.Minute
 	diffs := dmp.DiffMain(origin, modify, false)
 
 	for idx, diff := range diffs {
@@ -99,6 +102,9 @@ func ProofReadText(origin, modify string) []ProofreadResult {
 				if lastType == diffmatchpatch.DiffDelete && lastResultType == DeDeDe && pie.Contains(DeDeDeFilter, strings.TrimSpace(dText)) {
 					item.Typ = DeDeDe
 				}
+			}
+			if pie.Contains(PunctFilter, strings.TrimSpace(dText)) {
+				item.Typ = Punct
 			}
 			prefix := getPrefix(modify, mIdx)
 			suffix := getSuffix(modify, mIdx+len([]rune(dText)))

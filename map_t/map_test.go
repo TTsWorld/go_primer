@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"math/rand"
+	"strings"
 	"testing"
 )
 
@@ -99,4 +100,117 @@ func TestMapAdd2(t *testing.T) {
 	}
 	fmt.Printf("%+v", m)
 
+}
+
+type HomeModuleType int
+
+const (
+	KingKong               HomeModuleType = iota // king_kong
+	HotSeries                                    // hot_series
+	LikeStory                                    // like_story
+	ReadToday                                    // read_today
+	FeaturedList                                 // featured_list
+	RecommendBookList                            // recommend_book_list
+	RecommendLong                                // recommend_long
+	EveryoneWatchTitle                           // everyone_watch_title
+	EveryoneWatch                                // everyone_watch
+	ActivityBanners                              // activity_banners
+	FeaturedListNew                              // featured_list_new
+	ExcellentRadio                               // excellent_radio
+	ListenToday                                  // listen_today
+	EveryoneListenTitle                          // everyone_listen_title
+	EveryoneListen                               // everyone_listen
+	EveryoneListenAudio                          // everyone_listen_audio
+	EveryoneListenBooklist                       // everyone_listen_booklist
+	PinFeed                                      // pin_feed
+	PinFeedback                                  // pin_feedback
+	PinTopList                                   // pin_top_list
+	PinReadToday                                 // pin_read_today
+	VipPurchaseBanner                            // vip_purchase_banner
+	PinFreeZone                                  // pin_free_zone
+	AudioTabHackData                             // audio_tab_hack_data
+	VipInstabook                                 // vip_instabook
+	FeaturedListV3                               // featured_list_v3
+
+	FollowWorkPublish    // follow_work_publish
+	FollowPinPublish     // follow_pin_publish
+	FollowBookListUpdate // follow_book_list_update
+	FollowWorkUpdate     // follow_work_update
+	FollowAuthorTop      // follow_author_top
+	FollowLiveRoom       // follow_live_room
+
+	PinLiveRoomCard //pin_live_room_card
+
+	ListenTodayV2            // listen_today_v2
+	AudioBookTopBanner       // audio_book_top_banner
+	EveryoneListenAudioV2    // everyone_listen_audio_v2
+	ActivityPage             // activity_page
+	EveryoneListenBooklistV2 // everyone_listen_booklist_v2
+	NoticeBar                //notice_bar
+	VipPinLiveRoomCard       //vip_pin_live_room_card
+	EditorRecommend          //editor_recommend 编辑推荐
+	LatestUpdate             //latest_update 最近更新
+	TopList                  //top_list 榜单
+)
+
+// HomeModuleType Key Value Map
+var homeModuleTypeKeyMap = map[HomeModuleType]string{
+	KingKong:                 "king_kong",
+	HotSeries:                "hot_series",
+	LikeStory:                "like_story",
+	ReadToday:                "read_today",
+	FeaturedList:             "featured_list",
+	RecommendBookList:        "recommend_book_list",
+	RecommendLong:            "recommend_long",
+	EveryoneWatchTitle:       "everyone_watch_title",
+	EveryoneWatch:            "everyone_watch",
+	ActivityBanners:          "activity_banners",
+	FeaturedListNew:          "featured_list_new",
+	ExcellentRadio:           "excellent_radio",
+	ListenToday:              "listen_today",
+	EveryoneListenTitle:      "everyone_listen_title",
+	EveryoneListen:           "everyone_listen",
+	EveryoneListenAudio:      "everyone_listen_audio",
+	EveryoneListenBooklist:   "everyone_listen_booklist",
+	PinFeed:                  "pin_feed",
+	PinFeedback:              "pin_feedback",
+	PinTopList:               "pin_top_list",
+	PinReadToday:             "pin_read_today",
+	VipPurchaseBanner:        "vip_purchase_banner",
+	PinFreeZone:              "pin_free_zone",
+	AudioTabHackData:         "audio_tab_hack_data",
+	VipInstabook:             "vip_instabook",
+	FeaturedListV3:           "featured_list_v3",
+	FollowWorkPublish:        "follow_work_publish",
+	FollowPinPublish:         "follow_pin_publish",
+	FollowBookListUpdate:     "follow_book_list_update",
+	FollowWorkUpdate:         "follow_work_update",
+	FollowAuthorTop:          "follow_author_top",
+	FollowLiveRoom:           "follow_live_room",
+	PinLiveRoomCard:          "pin_live_room_card",
+	ListenTodayV2:            "listen_today_v2",
+	AudioBookTopBanner:       "audio_book_top_banner",
+	EveryoneListenAudioV2:    "everyone_listen_audio_v2",
+	ActivityPage:             "activity_page",
+	EveryoneListenBooklistV2: "everyone_listen_booklist_v2",
+	NoticeBar:                "notice_bar",
+	VipPinLiveRoomCard:       "vip_pin_live_room_card",
+	EditorRecommend:          "editor_recommend",
+	LatestUpdate:             "latest_update",
+	TopList:                  "top_list",
+}
+
+func HomeModuleTypeByKey(key string) (HomeModuleType, error) {
+	target := strings.ToLower(key)
+	for k, v := range homeModuleTypeKeyMap {
+		if v == target {
+			return k, nil
+		}
+	}
+	return 0, fmt.Errorf("invalid key: %s for HomeModuleType", key)
+
+}
+
+func TestM(t *testing.T) {
+	fmt.Println(HomeModuleTypeByKey(" editor_recommend "))
 }

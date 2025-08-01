@@ -71,6 +71,9 @@ func ProofReadTextV5(origin, modify string) []ProofreadResult {
 					item.Typ = Punct
 				}
 			}
+			if pie.Contains(PunctFilter, strings.TrimSpace(dText)) {
+				item.Typ = Punct
+			}
 			prefix := getPrefix(modify, mIdx)
 			suffix := getSuffix(modify, mIdx+len([]rune(dText)))
 

@@ -3,7 +3,6 @@ package diff
 import (
 	"github.com/sergi/go-diff/diffmatchpatch"
 	"strings"
-	"time"
 )
 
 type DiffData struct {
@@ -13,12 +12,11 @@ type DiffData struct {
 	DeleteText []string `json:"delete_text"`
 }
 
-func DiffTextOnlie(origin, modify string) []DiffData {
+func DiffTextOnlie(orig, modi string) []DiffData {
 	dmp := diffmatchpatch.New()
 
 	arr := make([]DiffData, 0)
-	dmp.DiffTimeout = time.Minute
-	diffs := dmp.DiffMain(modify, origin, false)
+	diffs := dmp.DiffMain(orig, modi, false)
 	data := DiffData{}
 	for j, diff := range diffs {
 		dType := diff.Type
@@ -102,8 +100,3 @@ func DiffTextOnlie(origin, modify string) []DiffData {
 	}
 	return arr
 }
-
-var (
-	origin, _ = ExtractText(C1)
-	modify, _ = ExtractText(C2)
-)

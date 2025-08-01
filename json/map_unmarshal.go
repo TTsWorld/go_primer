@@ -9,7 +9,7 @@ import (
 func TestMain(t *testing.T) {
 	s := ""
 	m := make(map[string]string)
-	err := json.unmarshal([]byte(s), &m)
+	err := json.Unmarshal([]byte(s), &m)
 	fmt.Printf("%v", err)
 	fmt.Printf("%v", m)
 

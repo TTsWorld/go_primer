@@ -93,7 +93,11 @@ var testCases = []TestCase{
 		modify: "只见她一只手的食指压住伤口，中指间隔开五厘米按压住血管，另一只手。",
 	},
 	// === case 10 end
-
+	// === case 11 start - idx=13
+	{
+		origin: "不，因为在如此美好的弦子身旁，我能感觉到自己内心的热情涌动，让我舒适且心安。也许......",
+		modify: "不，因为在如此美好的弦子身旁，我能感觉到自己内心的热情涌动，让我舒适且心安。也许……",
+	},
 }
 
 func TestProofReadText(t *testing.T) {
@@ -121,5 +125,10 @@ func TestProofReadTextV4(t *testing.T) {
 
 func TestProofReadTextV5(t *testing.T) {
 	ProofReadTextV5(testCases[12].origin, testCases[12].modify)
+	print(1)
+}
+
+func TestProofReadTextV6(t *testing.T) {
+	ProofReadTextV5(testCases[13].origin, testCases[13].modify)
 	print(1)
 }
