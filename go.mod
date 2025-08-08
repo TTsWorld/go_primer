@@ -1,6 +1,6 @@
 module go_primer
 
-go 1.22.0
+go 1.23.4
 
 toolchain go1.24.4
 
@@ -8,9 +8,10 @@ require (
 	github.com/ClickHouse/clickhouse-go v1.5.4
 	github.com/PuerkitoBio/goquery v1.9.2
 	github.com/anaskhan96/soup v1.2.5
-	github.com/bytedance/sonic v1.13.2
+	github.com/bytedance/sonic v1.14.0
 	github.com/casbin/casbin/v2 v2.79.0
 	github.com/casbin/gorm-adapter/v3 v3.20.0
+	github.com/daozhonglee/go-util v0.0.1
 	github.com/elliotchance/pie/v2 v2.7.0
 	github.com/gin-gonic/gin v1.8.1
 	github.com/go-faker/faker/v4 v4.4.1
@@ -46,24 +47,29 @@ require (
 	go.opentelemetry.io/otel/sdk v1.27.0
 	go.opentelemetry.io/otel/sdk/metric v1.27.0
 	go.uber.org/atomic v1.10.0
-	go.uber.org/zap v1.24.0
-	golang.org/x/net v0.26.0
-	golang.org/x/sync v0.11.0
+	go.uber.org/zap v1.27.0
+	golang.org/x/net v0.40.0
+	golang.org/x/sync v0.14.0
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1
 	gonum.org/v1/gonum v0.11.0
 	google.golang.org/appengine v1.6.8
 	google.golang.org/grpc v1.64.0
-	google.golang.org/protobuf v1.34.1
+	google.golang.org/protobuf v1.36.6
 	gorm.io/driver/mysql v1.4.1
 	gorm.io/gorm v1.24.5
 )
 
 require (
+	github.com/lestrrat-go/strftime v1.1.1 // indirect
+	github.com/pkg/errors v0.9.1 // indirect
+)
+
+require (
 	github.com/andybalholm/cascadia v1.3.2 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
-	github.com/bytedance/sonic/loader v0.2.4 // indirect
+	github.com/bytedance/sonic/loader v0.3.0 // indirect
 	github.com/casbin/govaluate v1.1.0 // indirect
-	github.com/cespare/xxhash/v2 v2.2.0 // indirect
+	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/cloudflare/golz4 v0.0.0-20150217214814-ef862a3cdc58 // indirect
 	github.com/cloudwego/base64x v0.1.5 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
@@ -102,6 +108,7 @@ require (
 	github.com/klauspost/compress v1.17.6 // indirect
 	github.com/klauspost/cpuid/v2 v2.0.9 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
+	github.com/lestrrat-go/file-rotatelogs v2.4.0+incompatible
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/microsoft/go-mssqldb v0.17.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
@@ -125,16 +132,16 @@ require (
 	github.com/xuri/nfp v0.0.0-20220409054826-5e722a1d9e22 // indirect
 	github.com/youmark/pkcs8 v0.0.0-20240726163527-a2c0da244d78 // indirect
 	go.opentelemetry.io/otel/trace v1.27.0 // indirect
-	go.uber.org/goleak v1.2.1 // indirect
-	go.uber.org/multierr v1.9.0 // indirect
+	go.uber.org/goleak v1.3.0 // indirect
+	go.uber.org/multierr v1.10.0 // indirect
 	golang.org/x/arch v0.11.0 // indirect
-	golang.org/x/crypto v0.29.0 // indirect
+	golang.org/x/crypto v0.38.0 // indirect
 	golang.org/x/exp v0.0.0-20230713183714-613f0c0eb8a1 // indirect
 	golang.org/x/mod v0.17.0 // indirect
-	golang.org/x/sys v0.27.0 // indirect
-	golang.org/x/text v0.20.0 // indirect
+	golang.org/x/sys v0.33.0 // indirect
+	golang.org/x/text v0.25.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240604185151-ef581f913117 // indirect
-	gopkg.in/natefinch/lumberjack.v2 v2.0.0 // indirect
+	gopkg.in/natefinch/lumberjack.v2 v2.2.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gorm.io/driver/postgres v1.4.4 // indirect

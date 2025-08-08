@@ -166,6 +166,7 @@ func SetDevelopment(Development bool) ModOptions {
 		option.Development = Development
 	}
 }
+
 func (l *Logger) cores() zap.Option {
 	fileEncoder := zapcore.NewJSONEncoder(l.zapConfig.EncoderConfig)
 	encoderConfig := zap.NewDevelopmentEncoderConfig()

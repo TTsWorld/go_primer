@@ -37,14 +37,14 @@ func (p ContributionDaoImpl) Print() {
 
 func NewContributionDao03() *ContributionDaoImpl {
 	if DefaultContributionDao != nil {
-		return DefaultContributionDao
+		return DefaultContributionDao.(*ContributionDaoImpl)
 	}
 	return &ContributionDaoImpl{}
 }
 
 func NewContributionDao04() ContributionDaoImpl {
 	if DefaultContributionDao != nil {
-		return DefaultContributionDao
+		return DefaultContributionDao.(ContributionDaoImpl)
 	}
 	return ContributionDaoImpl{}
 }
