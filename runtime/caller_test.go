@@ -3,6 +3,7 @@ package runtime_test
 import (
 	"fmt"
 	"runtime"
+	"runtime/debug"
 	"testing"
 )
 
@@ -34,5 +35,17 @@ func TestCaller(t *testing.T) {
 		}
 		fmt.Println("--------------------------------")
 	}
+}
 
+// 使用 runtime/debug.Stack 获取当前堆栈​
+func TestStackTrace(t *testing.T) {
+	stack := debug.Stack() // 返回 []byte
+	fmt.Println(string(stack))
+}
+
+// 使用 runtime.Stack 精细化控制​
+func TestStackTrace2(t *testing.T) {
+	buf := make([]byte, 1024)
+	n := runtime.Stack(buf, false) // false: 当前goroutine；true: 所有goroutine
+	fmt.Println(string(buf[:n]))
 }
