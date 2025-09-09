@@ -33,4 +33,5 @@ const (
 	ChatModelGPT3_5Turbo1106                ChatModel = "gpt-3.5-turbo-1106"
 	ChatModelGPT3_5Turbo0125                ChatModel = "gpt-3.5-turbo-0125"
 	ChatModelGPT3_5Turbo16k0613             ChatModel = "gpt-3.5-turbo-16k-0613"
+	DeepSeekV3                              ChatModel = "deepseek-v3-250324-baidubce"
 )
